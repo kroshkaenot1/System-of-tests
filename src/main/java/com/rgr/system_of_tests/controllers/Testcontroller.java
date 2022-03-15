@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Testcontroller {
     @Autowired
     private TestsRepository testsRepository;
+    @GetMapping("/")
+    public String home(Model model){
+        return "home";
+    }
     @GetMapping("/test")
     public String testMain(Model model){
         Iterable<Tests> tests = testsRepository.findAll();

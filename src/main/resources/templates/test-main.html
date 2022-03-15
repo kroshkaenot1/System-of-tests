@@ -9,7 +9,10 @@
 <body>
     <div th:insert ="blocks/header::header"></div>
 <div class="container mt-5">
-    <h1>Сайт с тестами</h1>
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+    </form>
+    <h1>Список тестов:</h1>
     <div th:each="el : ${tests}" class="alert alert-info mt-2">
         <h3 th:text="${el.title}"/>
         <p th:text = "${el.description}"/>
