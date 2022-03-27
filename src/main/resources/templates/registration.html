@@ -16,34 +16,18 @@
         <div>
             <div>
                 <h4 class="mb-3">Данные:</h4>
-                <form class="needs-validation" novalidate="">
+                <form class="needs-validation" novalidate="" method="post" action="/registration">
                     <div class="row">
                         <div class="col-sm">
                             <label for="firstName" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" name="username">
                             <div class="invalid-feedback">
                                 Корректное имя необходимо.
                             </div>
                         </div>
-
-                        <div class="col-sm">
-                            <label for="lastName" class="form-label">Фамилия</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                            <div class="invalid-feedback">
-                                Корректная фамилия необходима.
-                            </div>
-                        </div>
-                        <div>
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                            <div class="invalid-feedback">
-                                Введите корректный email адресс.
-                            </div>
-                        </div>
-
                         <div class="mb-3">
                             <label for="password" class="form-label">Пароль</label>
-                            <input type="password" class="form-control" id="password" required="">
+                            <input type="password" class="form-control" id="password" required="" name="password">
                             <div class="invalid-feedback">
                                 Введите пароль.
                             </div>

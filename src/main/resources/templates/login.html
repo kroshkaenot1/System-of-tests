@@ -7,19 +7,18 @@
 </head>
 <body class="text-center" style="display: flex;align-items: center">
 <main class="form-signin mx-auto my-auto" style="width: 330px; min-height: 100vh">
-    <form>
+    <form method="post" action="/login">
         <img class="mb-4" src="https://2x2.su/upload/iblock/ca2/ca2dbb8bd0083d8ef66f256ad0f49733.jpg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Вход в аккаунт</h1>
 
         <div class="form-floating mb-4">
-            <input type="email" class="form-control" id="floatingInput">
+            <input type="text" class="form-control" id="floatingInput" name="username">
             <label for="floatingInput">Email</label>
         </div>
         <div class="form-floating mb-4">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" name="password">
             <label for="floatingPassword">Пароль</label>
         </div>
-
         <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
     </form>
 </main>
