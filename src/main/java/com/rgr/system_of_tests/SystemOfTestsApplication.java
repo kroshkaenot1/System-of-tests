@@ -1,5 +1,6 @@
 package com.rgr.system_of_tests;
 
+import com.rgr.system_of_tests.models.Roles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SystemOfTestsApplication {
 
 	public static void main(String[] args) {
-		System.out.println();
 		SpringApplication.run(SystemOfTestsApplication.class, args);
 	}
 

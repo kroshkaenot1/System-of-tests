@@ -1,4 +1,4 @@
-<div th:fragment = "header">
+<div th:fragment="header" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -8,8 +8,8 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="/test" class="nav-link px-2 text-white">Тесты</a></li>
+                    <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin" class="nav-link px-2 text-white">Администратор</a></li>
                 </ul>
-
                 <div class="text-end">
                     <span th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</span>
                     <a href="/logout"><button type="button" class="btn btn-warning">Logout</button></a>

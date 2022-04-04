@@ -14,7 +14,7 @@
     <h1>Список тестов:</h1>
     <div th:each="el : ${tests}" class="alert alert-info mt-2">
         <h3 th:text="${el.title}"/>
-        <p th:text = "${el.description}"/>
+        <p th:text ="${el.description}"/>
     </div>
 </div>
 </body>
