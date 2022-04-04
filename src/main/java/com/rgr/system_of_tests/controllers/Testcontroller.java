@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class Testcontroller {
@@ -55,4 +56,9 @@ public class Testcontroller {
         usersRepository.save(user);
         return "login";
     }
+    @GetMapping("/admin")
+    public String admin(Model model){
+    Iterable<Users> users = usersRepository.findAll();
+    model.addAttribute("users",users);
+    return "admin";}
 }
