@@ -24,17 +24,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home","/registration").permitAll()
-                .antMatchers("/test").hasAnyRole(Roles.ADMIN.name(),Roles.TESTER.name(),Roles.USER.name())
-                .antMatchers(HttpMethod.DELETE,"/api/**").hasRole(Roles.ADMIN.name())
-                .antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(Roles.ADMIN.name(),Roles.TESTER.name(),Roles.USER.name())
-                .antMatchers(HttpMethod.POST,"/api/**").hasAnyRole(Roles.ADMIN.name(),Roles.TESTER.name())
+                .antMatchers("/test").authenticated()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
-                .permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout()
-                .permitAll();
+                .logout().permitAll();
     }
 
     @Override
