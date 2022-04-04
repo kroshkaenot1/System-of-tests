@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 
@@ -40,19 +39,23 @@ public class Testcontroller {
     public String log(Model model){
         return "home";
     }
+
     @GetMapping("/registration")
     public String reg(Model model){
         return "registration";
     }
+
     @PostMapping("/registration")
-    public String regg(@RequestParam String username,String password, Users user){
+    public String regg(Users user){
+
         Users userfromDB =usersRepository.findByUsername(user.getUsername());
         if(userfromDB!=null){
-            return "login";
+            return "registration";
         }
+
         user.setRoles(Collections.singleton(Roles.USER));
         user.setActive(true);
         usersRepository.save(user);
-        return "login";
+        return "redirect:/login";
     }
 }
