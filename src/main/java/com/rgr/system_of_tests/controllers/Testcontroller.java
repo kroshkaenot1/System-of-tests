@@ -48,12 +48,10 @@ public class Testcontroller {
 
     @PostMapping("/registration")
     public String regg(Users user){
-
         Users userfromDB =usersRepository.findByUsername(user.getUsername());
         if(userfromDB!=null){
             return "registration";
         }
-
         user.setRoles(Collections.singleton(Roles.USER));
         user.setActive(true);
         usersRepository.save(user);

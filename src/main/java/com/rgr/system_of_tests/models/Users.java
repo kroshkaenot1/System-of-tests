@@ -10,7 +10,24 @@ public class Users{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username,password;
+    private String username,password,firstname,lastname;
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     private boolean active;
 
     @ElementCollection(targetClass = Roles.class,fetch = FetchType.EAGER)
