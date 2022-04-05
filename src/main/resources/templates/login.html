@@ -23,11 +23,12 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
     </form>
     <div th:if="${param.error}">
-        Неправильный логин или пароль!
+        Вы ввели неправильный логин/пароль или ваш аккаунт не активирован!
     </div>
     <div th:if="${param.logout}">
         Вы вышли из профиля!
     </div>
+    <div th:text="${message}"></div>
 </main>
 </body>
 </html>

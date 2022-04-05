@@ -5,5 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface TestsRepository extends CrudRepository<Tests,Long> {
 
-
 }

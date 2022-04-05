@@ -1,4 +1,4 @@
-package com.rgr.system_of_tests;
+package com.rgr.system_of_tests.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -10,6 +10,5 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/registration").setViewName("registration");
     }
 }
