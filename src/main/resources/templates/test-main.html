@@ -9,15 +9,19 @@
 <body>
 <div th:insert ="blocks/header::header"></div>
 <div class="container mt-5">
-    <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
-        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" id="input">
-    </div>
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 row" action="" method="post">
+        <input type="search" class="form-control form-control-dark col" placeholder="Search..." aria-label="Search" id="input">
+        <input type="date" id="date" class="col-md-2">
+        <button type="submit"  class="btn btn-primary col-md-2">Найти</button>
+    </form>
     <h1>Список тестов:</h1>
     <div th:each="el : ${tests}" class="alert alert-info mt-2 test">
-        <h3 class="title" th:text="${el.title}"/>
-        <p class="desc"  th:text ="${el.description}"/>
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="'/test/'+${el.getId()}+'/edit'" class="btn btn-warning">Редактировать</a>
-        <a sec:authorize="hasAuthority('ADMIN')" th:href="'/test/'+${el.getId()}+'/remove'" class="btn btn-warning">Удалить</a>
+        <h3 class="title" th:text="${el.getTitle()}"/>
+        <p class="desc"  th:text ="${el.getDescription()}"/>
+        <a sec:authorize="hasAuthority('TESTER')" th:href="'/test/' +${el.getId()}+ '/edit'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/test/' +${el.getId()}+ '/remove'" method="post">
+        <button type="submit" sec:authorize="hasAuthority('TESTER')" class="btn btn-warning">Удалить</button>
+        </form>
     </div>
 </div>
 </body>

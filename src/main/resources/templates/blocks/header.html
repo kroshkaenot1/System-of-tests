@@ -10,6 +10,7 @@
                     <li><a href="/" class="nav-link px-2 text-white">Главная</a></li>
                     <li><a href="/test" class="nav-link px-2 text-white">Тесты</a></li>
                     <li><a sec:authorize="hasAuthority('ADMIN')" href="/admin" class="nav-link px-2 text-white">Администратор</a></li>
+                    <li><a sec:authorize="hasAuthority('TESTER')" href="/test/add" class="nav-link px-2 text-white">Добавить тест</a></li>
                 </ul>
 
                 <div class="text-end">

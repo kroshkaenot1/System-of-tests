@@ -31,7 +31,6 @@ public class Users implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Roles> roles;
 
-
     public String getFirstname() {
         return firstname;
     }

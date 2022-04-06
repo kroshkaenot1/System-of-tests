@@ -1,6 +1,5 @@
 package com.rgr.system_of_tests;
 
-import com.rgr.system_of_tests.models.Roles;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

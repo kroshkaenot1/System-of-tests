@@ -12,6 +12,14 @@ public class Tests {
     private Long id;
     private String title,description;
 
+    public Tests(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Tests() {
+    }
+
     public Long getId() {
         return id;
     }
