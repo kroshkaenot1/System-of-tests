@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>AlTests</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,7 +16,8 @@
     <div th:each="el : ${tests}" class="alert alert-info mt-2 test">
         <h3 class="title" th:text="${el.title}"/>
         <p class="desc"  th:text ="${el.description}"/>
-        <button href=""
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="'/test/'+${el.getId()}+'/edit'" class="btn btn-warning">Редактировать</a>
+        <a sec:authorize="hasAuthority('ADMIN')" th:href="'/test/'+${el.getId()}+'/remove'" class="btn btn-warning">Удалить</a>
     </div>
 </div>
 </body>

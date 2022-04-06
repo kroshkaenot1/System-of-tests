@@ -5,12 +5,16 @@ import com.rgr.system_of_tests.models.Users;
 import com.rgr.system_of_tests.repo.TestsRepository;
 import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Controller
 public class Testcontroller {
@@ -30,14 +34,15 @@ public class Testcontroller {
         model.addAttribute("tests",tests);
         return "test-main";
     }
-    @GetMapping("/login")
-    public String login(Model model){
-        return "login";
-    }
-    @PostMapping("/login")
-    public String log(Model model){
-        return "home";
-    }
+    /*@GetMapping("/test/+{id}+/edit")
+    public String testEdit(@PathVariable(value = "id") long id, Model model){
+        if(!testsRepository.existsById(id)){
+            return "redirect:/test";
+        }
+        Optional<Tests> test = testsRepository.findById(id);
+        model.addAttribute("message",test);
+        return "test-edit";
+    }*/
     @GetMapping("/admin")
     public String admin(Model model){
     Iterable<Users> users = usersRepository.findAll();
