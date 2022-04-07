@@ -2,7 +2,6 @@ package com.rgr.system_of_tests.controllers;
 
 import com.rgr.system_of_tests.models.Tests;
 import com.rgr.system_of_tests.repo.TestsRepository;
-import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -60,5 +64,13 @@ public class Testcontroller {
         Tests test = new Tests(title,description);
         testsRepository.save(test);
         return "redirect:/test";
+    }
+    @PostMapping("/search")
+    public String testSearch(Model model,@RequestParam String date)throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date1 = format.parse(date);
+        ArrayList<Tests> resTests = testsRepository.findByDate(date1);
+        model.addAttribute("tests",resTests);
+        return "test-main";
     }
 }

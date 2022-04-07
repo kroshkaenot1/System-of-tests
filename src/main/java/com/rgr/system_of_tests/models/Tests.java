@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 public class Tests {
@@ -11,10 +12,20 @@ public class Tests {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title,description;
+    private LocalDateTime date;
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public Tests(String title, String description) {
         this.title = title;
         this.description = description;
+        this.date = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public Tests() {
