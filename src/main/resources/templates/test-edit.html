@@ -11,8 +11,8 @@
         <h1>Редактирование теста</h1>
             <div th:each="el : ${test}" class="alert alert-info mt-2">
                 <form th:action="'/test/' +${el.getId()}+ '/edit'" method="post">
-                    <input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control"><br>
-                    <textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}"/><br>
+                    <input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control" required><br>
+                    <textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/><br>
                     <button type="submit" class="btn btn-success">Обновить</button>
                 </form>
             </div>

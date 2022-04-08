@@ -113,4 +113,13 @@ public class Users implements UserDetails {
     public void setRoles(Set<Roles> roles) {
         this.roles = roles;
     }
+
+    public boolean ifRole(String role){
+        for (Roles r: roles) {
+            if(role.equals(r.toString())){
+                 return true;
+        }
+        }
+        return false;
+    }
 }

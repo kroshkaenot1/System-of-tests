@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test/*/remove").hasAnyAuthority(Roles.ADMIN.getAuthority(),Roles.TESTER.getAuthority())
                 .antMatchers("/test/add").hasAnyAuthority(Roles.ADMIN.getAuthority(),Roles.TESTER.getAuthority())
                 .antMatchers("/admin").hasAuthority(Roles.ADMIN.getAuthority())
+                .antMatchers("/admin/*/edit").hasAuthority(Roles.ADMIN.getAuthority())
                 .antMatchers("/", "/home","/registration","/activate/*").permitAll()
                 .antMatchers(HttpMethod.POST,"/test").authenticated()
                 .anyRequest().authenticated()

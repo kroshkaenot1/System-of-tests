@@ -22,6 +22,8 @@
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.getRoles()}"/>
+            <td><a th:href="'/admin/'+${user.getId()}+'/edit'" class="btn btn-warning">Редактировать</a></td>
+            <td><a th:href="'/admin/'+${user.getId()}+'/remove'" class="btn btn-warning">Удалить</a></td>
         </tr>
         </tbody>
     </table>

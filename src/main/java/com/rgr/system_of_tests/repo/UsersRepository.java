@@ -8,4 +8,5 @@ public interface UsersRepository extends CrudRepository<Users,Long> {
     Users findByUsername(String username);
     @Query("select u from Users u where u.ActivationCode=?1")
     Users findByActivationCode(String code);
+    Users findById(String id);
 }
