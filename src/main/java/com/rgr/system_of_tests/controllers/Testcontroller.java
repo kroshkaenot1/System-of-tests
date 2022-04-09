@@ -65,12 +65,18 @@ public class Testcontroller {
         testsRepository.save(test);
         return "redirect:/test";
     }
-    @PostMapping("/search")
-    public String testSearch(Model model,@RequestParam String date)throws ParseException {
+    @PostMapping("/test")
+    public String testSearch(Model model,@RequestParam String date,@RequestParam String search)throws ParseException {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date1 = format.parse(date);
         ArrayList<Tests> resTests = testsRepository.findByDate(date1);
-        model.addAttribute("tests",resTests);
+        ArrayList<Tests> TestsForModel = new ArrayList<>();
+        for(Tests t:resTests){
+            if(t.getTitle().toLowerCase().contains(search.toLowerCase()) || t.getDescription().toLowerCase().contains(search.toLowerCase())){
+                TestsForModel.add(t);
+            }
+        }
+        model.addAttribute("tests",TestsForModel);
         return "test-main";
     }
 }
