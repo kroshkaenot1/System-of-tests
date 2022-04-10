@@ -56,5 +56,14 @@ public class AdminController {
 
         return "redirect:/admin";
     }
+    @PostMapping("/admin/{id}/remove")
+    public String adminDelete(@PathVariable(value="id")long id){
+
+        Users user = usersRepository.findId(id);
+
+        usersRepository.delete(user);
+
+        return "redirect:/admin";
+    }
 
 }

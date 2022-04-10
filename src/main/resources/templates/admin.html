@@ -23,7 +23,10 @@
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.getRoles()}"/>
             <td><a th:href="'/admin/'+${user.getId()}+'/edit'" class="btn btn-warning">Редактировать</a></td>
-            <td><a th:href="'/admin/'+${user.getId()}+'/remove'" class="btn btn-warning">Удалить</a></td>
+            <td><form th:action="'/admin/'+${user.getId()}+'/remove'"  method="post">
+                <button class="btn btn-warning" type="submit">Удалить</button>
+            </form>
+            </td>
         </tr>
         </tbody>
     </table>
