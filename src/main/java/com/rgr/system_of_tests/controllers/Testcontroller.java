@@ -1,6 +1,6 @@
 package com.rgr.system_of_tests.controllers;
 
-import com.rgr.system_of_tests.models.Tests;
+import com.rgr.system_of_tests.repo.models.Tests;
 import com.rgr.system_of_tests.repo.TestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,8 +1,7 @@
 package com.rgr.system_of_tests.controllers;
 
-import com.rgr.system_of_tests.models.Roles;
-import com.rgr.system_of_tests.models.Tests;
-import com.rgr.system_of_tests.models.Users;
+import com.rgr.system_of_tests.repo.models.Roles;
+import com.rgr.system_of_tests.repo.models.Users;
 import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Optional;
+import javax.management.relation.Role;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class AdminController {
@@ -37,7 +36,24 @@ public class AdminController {
         model.addAttribute("roles",Roles.values());
         return "admin-edit";}
     @PostMapping("/admin/{id}/edit")
-    public String adminUpd(@PathVariable(value="id")long id){
+    public String adminUpd(@PathVariable(value="id")long id,
+                           @RequestParam Map<String, String> form){
+
+        Set<String> roles = Arrays.stream(Roles.values())
+                .map(Roles::name)
+                .collect(Collectors.toSet());
+
+        Users user = usersRepository.findId(id);
+
+        user.getRoles().clear();
+
+        for(String key : form.keySet()){
+            if(roles.contains(key)){
+                user.getRoles().add(Roles.valueOf(key));
+            }
+        }
+        usersRepository.save(user);
+
         return "redirect:/admin";
     }
 

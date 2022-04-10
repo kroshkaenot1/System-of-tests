@@ -1,4 +1,4 @@
-package com.rgr.system_of_tests.models;
+package com.rgr.system_of_tests.repo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

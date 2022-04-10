@@ -1,6 +1,6 @@
 package com.rgr.system_of_tests.config;
 
-import com.rgr.system_of_tests.models.Roles;
+import com.rgr.system_of_tests.repo.models.Roles;
 import com.rgr.system_of_tests.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
