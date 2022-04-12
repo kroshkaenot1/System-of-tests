@@ -15,13 +15,12 @@
         <button type="submit"  class="btn btn-primary col-md-2">Найти</button>
     </form>
     <h1>Список тестов:</h1>
-    <div th:each="el : ${tests}" class="alert alert-info mt-2 test">
+    <div th:each="el : ${tests}" class="alert alert-dark" role="alert">
         <h3 class="title" th:text="${el.getTitle()}"/>
         <p class="desc"  th:text ="${el.getDescription()}"/>
+        <form th:action="'/test/' +${el.getId()}+ '/remove'" method="post" id="remove"></form>
         <a sec:authorize="hasAuthority('TESTER')" th:href="'/test/' +${el.getId()}+ '/edit'" class="btn btn-warning">Редактировать</a>
-        <form th:action="'/test/' +${el.getId()}+ '/remove'" method="post" class="pt-1">
-        <button type="submit" sec:authorize="hasAuthority('TESTER')" class="btn btn-warning">Удалить</button>
-        </form>
+        <button type="submit" sec:authorize="hasAuthority('TESTER')" class="btn btn-warning" form="remove">Удалить</button>
     </div>
 </div>
 </body>

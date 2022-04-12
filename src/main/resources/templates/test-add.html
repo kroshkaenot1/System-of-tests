@@ -9,9 +9,32 @@
     <div th:insert ="blocks/header::header"></div>
     <div class="container mt-5">
         <h1>Добавление теста</h1>
-        <form action="/test/add" method="post">
+        <form action="/test/add" method="post" class="alert alert-dark">
             <input type="text" name="title" placeholder="Введите название" class="form-control" required><br>
             <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea><br>
+            <div id="question1" class="alert alert-warning">
+                <input type="text" name="question" placeholder="Введите вопрос" class="form-control" required id="q1"><br>
+                <div class="input-group mb-4">
+                    <input type="file" class="form-control" id="img1">
+                </div>
+                <div class="row g-2 mb-2">
+                <div class="col-md-8 ">
+                        <input type="text" id="a1" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
+                </div>
+                <div class="col md-4">
+                             <input type="text" id="b1" name="res" placeholder="Количество баллов" class="form-control" required>
+                </div></div>
+                <div class="row g-2 mb-2">
+                <div class="col-md-8">
+                    <input type="text" id="a2" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
+                </div>
+                <div class="col md-4">
+                    <input type="text" id="b2" name="res" placeholder="Количество баллов" class="form-control" required>
+                </div></div>
+            </div>
+
+
+
             <button type="submit" class="btn btn-success">Добавить</button>
         </form>
     </div>
