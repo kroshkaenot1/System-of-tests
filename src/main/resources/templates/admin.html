@@ -8,7 +8,7 @@
 </head>
 <body>
     <div th:insert ="blocks/header::header"></div>
-    <div class="container mt-5">
+    <div class="container p-3 mb-2 bg-warning text-dark mt-5">
     <table class="table">
         <thead>
         <tr>
@@ -22,14 +22,15 @@
             <td th:text="${user.getId()}"/>
             <td th:text="${user.getUsername()}"/>
             <td th:text="${user.getRoles()}"/>
-            <td><a th:href="'/admin/'+${user.getId()}+'/edit'" class="btn btn-warning">Редактировать</a></td>
+            <td><a th:href="'/admin/'+${user.getId()}+'/edit'" class="btn btn-dark">Редактировать</a></td>
             <td><form th:action="'/admin/'+${user.getId()}+'/remove'"  method="post">
-                <button class="btn btn-warning" type="submit">Удалить</button>
+                <button class="btn btn-dark" type="submit">Удалить</button>
             </form>
             </td>
         </tr>
         </tbody>
     </table>
+    </div>
     </div>
 </body>
 </html>

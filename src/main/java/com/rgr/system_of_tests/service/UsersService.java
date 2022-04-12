@@ -36,8 +36,8 @@ public class UsersService implements UserDetailsService {
         usersRepository.save(user);
         if(!StringUtils.isEmpty(user.getUsername())){
             String message = String.format(
-                    "Hello,%s \n"+
-                            "Welcome to System of tests. Please,visit next link : http://localhost:8080/activate/%s",
+                    "Доброго времени суток,%s \n"+
+                            "Пожалуйста, пройдите по ссылке для активации аккаунта: http://localhost:8080/activate/%s",
                     user.getFirstname(),
                     user.getActivationCode()
             );
