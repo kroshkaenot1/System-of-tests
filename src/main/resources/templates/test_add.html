@@ -6,41 +6,40 @@
     <title>Добавление теста</title>
 </head>
 <body>
-<div th:insert ="blocks/header::header"></div>
+    <div th:insert ="blocks/header::header"></div>
 
-<div class="container p-3 mb-2 bg-warning text-dark mt-5">
-    <h1 class="text-center">Создание теста</h1>
-    <form action="/test/add" method="post" id="test">
-        <input type="text" name="title" placeholder="Введите название" class="form-control" required><br>
-        <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea><br>
-        <div class="p-3 mb-2 bg-dark text-white">
-            <div id="question1">
-                <input type="text" name="question" placeholder="Введите вопрос" class="form-control" required><br>
-                <div class="input-group mb-4">
-                    <input type="file" class="form-control">
-                </div>
-                <div class="row g-2 mb-2 vb">
-                    <div class="col-md-8 ">
-                        <input type="text"name="vquestion" placeholder="Варианты ответов" class="form-control" required>
-                    </div>
-                    <div class="col md-4">
-                        <input type="text" name="res" placeholder="Количество баллов" class="form-control" required>
-                    </div></div>
-                <div class="row g-2 mb-2">
+    <div class="container p-3 mb-2 bg-warning text-dark mt-5">
+        <h1 class="text-center">Создание теста</h1>
+        <form action="/test/add" method="post" id="test">
+            <input type="text" name="title" placeholder="Введите название" class="form-control" required><br>
+            <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea><br>
+            <div class="p-3 mb-2 bg-dark text-white">
+                <div>
+                    <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
+                    <input type="file" class="form-control mb-4">
+                    <div class="row g-2 mb-2">
                     <div class="col-md-8">
-                        <input type="text" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
+                        <input type="text"name="a1" placeholder="Варианты ответов" class="form-control" required>
                     </div>
                     <div class="col md-4">
-                        <input type="text" name="res" placeholder="Количество баллов" class="form-control" required>
+                             <input type="text" name="b1" placeholder="Количество баллов" class="form-control" required>
                     </div></div>
+                    <div class="row g-2 mb-2">
+                    <div class="col-md-8">
+                        <input type="text" name="a2" placeholder="Варианты ответов" class="form-control" required>
+                    </div>
+                    <div class="col md-4">
+                        <input type="text" name="b2" placeholder="Количество баллов" class="form-control" required>
+                    </div></div>
+                </div>
+                <input type="button" class="btn btn-warning mt-3" value="Добавить вариант ответа">
             </div>
-            <input type="button" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="vb()" id="b1">
-        </div>
-        <input type="button" class="btn btn-dark mt-3 " value="Добавить вопрос">
-    </form>
-    <button type="submit" class="btn btn-dark mt-4" form="test">Создать тест</button>
-</div>
+        </form>
+        <input type="button" class="btn btn-dark mt-4" value="Добавить вопрос" id="b1">
+        <button type="submit" class="btn btn-dark mt-4" form="test">Создать тест</button>
+    </div>
 
 </body>
 <script src="../test_add.js"></script>
+<script src="../answer_add.js"></script>
 </html>
