@@ -1,6 +1,6 @@
 package com.rgr.system_of_tests.controllers;
 
-import com.rgr.system_of_tests.repo.models.Tests;
+import com.rgr.system_of_tests.repo.models.Test;
 import com.rgr.system_of_tests.repo.TestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class Testcontroller {
     }
     @GetMapping("/test")
     public String testMain(Model model){
-        Iterable<Tests> tests = testsRepository.findAll();
+        Iterable<Test> tests = testsRepository.findAll();
         model.addAttribute("tests",tests);
         return "test_main";
     }
@@ -37,15 +37,15 @@ public class Testcontroller {
         if(!testsRepository.existsById(id)){
             return "redirect:/test";
         }
-        Optional<Tests> test = testsRepository.findById(id);
-        ArrayList<Tests> res = new ArrayList<>();
+        Optional<Test> test = testsRepository.findById(id);
+        ArrayList<Test> res = new ArrayList<>();
         test.ifPresent(res::add);
         model.addAttribute("test",res);
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
     public String testUpd(@PathVariable(value = "id") long id, @RequestParam String title,@RequestParam String description){
-        Tests test = testsRepository.findById(id).orElseThrow();
+        Test test = testsRepository.findById(id).orElseThrow();
         test.setTitle(title);
         test.setDescription(description);
         testsRepository.save(test);
@@ -54,7 +54,7 @@ public class Testcontroller {
     @PostMapping("/test/{id}/remove")
     public String testRemove(@PathVariable(value = "id") long id){
 
-        Tests test = testsRepository.findById(id).orElseThrow();
+        Test test = testsRepository.findById(id).orElseThrow();
         testsRepository.delete(test);
         return "redirect:/test";
     }
@@ -62,7 +62,7 @@ public class Testcontroller {
     public String testAdd(){return "test_add";}
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam String title,@RequestParam String description){
-        Tests test = new Tests(title,description);
+        Test test = new Test(title,description);
         testsRepository.save(test);
         return "redirect:/test";
     }
@@ -70,9 +70,9 @@ public class Testcontroller {
     public String testSearch(Model model,@RequestParam String date,@RequestParam String search)throws ParseException {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date1 = format.parse(date);
-        ArrayList<Tests> resTests = testsRepository.findByDate(date1);
-        ArrayList<Tests> TestsForModel = new ArrayList<>();
-        for(Tests t:resTests){
+        ArrayList<Test> resTests = testsRepository.findByDate(date1);
+        ArrayList<Test> TestsForModel = new ArrayList<>();
+        for(Test t:resTests){
             if(t.getTitle().toLowerCase().contains(search.toLowerCase()) || t.getDescription().toLowerCase().contains(search.toLowerCase())){
                 TestsForModel.add(t);
             }

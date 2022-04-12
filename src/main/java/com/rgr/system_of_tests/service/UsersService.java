@@ -1,7 +1,7 @@
 package com.rgr.system_of_tests.service;
 
-import com.rgr.system_of_tests.repo.models.Roles;
-import com.rgr.system_of_tests.repo.models.Users;
+import com.rgr.system_of_tests.repo.models.Role;
+import com.rgr.system_of_tests.repo.models.User;
 import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,14 +23,14 @@ public class UsersService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usersRepository.findByUsername(username);
     }
-    public boolean addUser(Users user){
-        Users userfromDB =usersRepository.findByUsername(user.getUsername());
+    public boolean addUser(User user){
+        User userfromDB =usersRepository.findByUsername(user.getUsername());
 
         if(userfromDB!=null){
             return false;
         }
 
-        user.setRoles(Collections.singleton(Roles.USER));
+        user.setRoles(Collections.singleton(Role.USER));
         user.setActive(false);
         user.setActivationCode(UUID.randomUUID().toString());
         usersRepository.save(user);
@@ -41,13 +41,13 @@ public class UsersService implements UserDetailsService {
                     user.getFirstname(),
                     user.getActivationCode()
             );
-            mailSender.send(user.getUsername(),"Activation code",message);
+            mailSender.send(user.getUsername(),"Код активации",message);
         }
         return true;
     }
 
     public boolean activateUser(String code) {
-        Users user = usersRepository.findByActivationCode(code);
+        User user = usersRepository.findByActivationCode(code);
         if (user==null){
             return false;
         }

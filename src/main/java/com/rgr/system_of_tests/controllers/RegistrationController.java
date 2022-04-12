@@ -1,6 +1,6 @@
 package com.rgr.system_of_tests.controllers;
 
-import com.rgr.system_of_tests.repo.models.Users;
+import com.rgr.system_of_tests.repo.models.User;
 import com.rgr.system_of_tests.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String regg(Users user,Model model){
+    public String regg(User user, Model model){
        if(!usersService.addUser(user)){
            model.addAttribute("message","Пользователь существует!");
            return "registration";

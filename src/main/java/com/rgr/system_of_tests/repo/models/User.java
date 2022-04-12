@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 @Entity
-public class Users implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -26,10 +26,10 @@ public class Users implements UserDetails {
         ActivationCode = activationCode;
     }
 
-    @ElementCollection(targetClass = Roles.class,fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Role.class,fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Roles> roles;
+    private Set<Role> roles;
 
     public String getFirstname() {
         return firstname;
@@ -54,7 +54,7 @@ public class Users implements UserDetails {
         this.active = active;
     }
 
-    public Users() {
+    public User() {
     }
 
     public Long getId() {
@@ -106,16 +106,16 @@ public class Users implements UserDetails {
         this.password = password;
     }
 
-    public Set<Roles> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
     public boolean ifRole(String role){
-        for (Roles r: roles) {
+        for (Role r: roles) {
             if(role.equals(r.toString())){
                  return true;
         }

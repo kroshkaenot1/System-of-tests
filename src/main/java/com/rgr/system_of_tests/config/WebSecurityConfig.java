@@ -1,10 +1,9 @@
 package com.rgr.system_of_tests.config;
 
-import com.rgr.system_of_tests.repo.models.Roles;
+import com.rgr.system_of_tests.repo.models.Role;
 import com.rgr.system_of_tests.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,11 +24,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/test").authenticated()
-                .antMatchers("/test/*/edit").hasAnyAuthority(Roles.ADMIN.getAuthority(),Roles.TESTER.getAuthority())
-                .antMatchers("/test/*/remove").hasAnyAuthority(Roles.ADMIN.getAuthority(),Roles.TESTER.getAuthority())
-                .antMatchers("/test/add").hasAnyAuthority(Roles.ADMIN.getAuthority(),Roles.TESTER.getAuthority())
-                .antMatchers("/admin").hasAuthority(Roles.ADMIN.getAuthority())
-                .antMatchers("/admin/*/edit").hasAuthority(Roles.ADMIN.getAuthority())
+                .antMatchers("/test/*/edit").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
+                .antMatchers("/test/*/remove").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
+                .antMatchers("/test/add").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
+                .antMatchers("/admin").hasAuthority(Role.ADMIN.getAuthority())
+                .antMatchers("/admin/*/edit").hasAuthority(Role.ADMIN.getAuthority())
                 .antMatchers("/", "/home","/registration","/activate/*").permitAll()
                 .anyRequest().authenticated()
                 .and()

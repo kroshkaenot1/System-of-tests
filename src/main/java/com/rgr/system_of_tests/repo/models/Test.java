@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class Tests {
+public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +18,7 @@ public class Tests {
         this.date = date;
     }
 
-    public Tests(String title, String description) {
+    public Test(String title, String description) {
         this.title = title;
         this.description = description;
         this.date = LocalDateTime.now();
@@ -28,7 +28,7 @@ public class Tests {
         return date;
     }
 
-    public Tests() {
+    public Test() {
     }
 
     public Long getId() {
