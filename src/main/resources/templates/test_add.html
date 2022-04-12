@@ -13,31 +13,32 @@
         <form action="/test/add" method="post" id="test">
             <input type="text" name="title" placeholder="Введите название" class="form-control" required><br>
             <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea><br>
-            <div id="question1" class="p-3 mb-2 bg-dark text-white">
-                <input type="text" name="question" placeholder="Введите вопрос" class="form-control" required id="q1"><br>
-                <div class="input-group mb-4">
-                    <input type="file" class="form-control" id="img1">
+            <div class="p-3 mb-2 bg-dark text-white">
+                <div id="question1">
+                    <input type="text" name="question" placeholder="Введите вопрос" class="form-control" required><br>
+                    <div class="input-group mb-4">
+                        <input type="file" class="form-control">
+                    </div>
+                    <div class="row g-2 mb-2 vb">
+                    <div class="col-md-8 ">
+                        <input type="text"name="vquestion" placeholder="Варианты ответов" class="form-control" required>
+                    </div>
+                    <div class="col md-4">
+                             <input type="text" name="res" placeholder="Количество баллов" class="form-control" required>
+                    </div></div>
+                    <div class="row g-2 mb-2">
+                    <div class="col-md-8">
+                        <input type="text" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
+                    </div>
+                    <div class="col md-4">
+                        <input type="text" name="res" placeholder="Количество баллов" class="form-control" required>
+                    </div></div>
                 </div>
-                <div class="row g-2 mb-2">
-                <div class="col-md-8 ">
-                        <input type="text" id="a1" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
-                </div>
-                <div class="col md-4">
-                             <input type="text" id="b1" name="res" placeholder="Количество баллов" class="form-control" required>
-                </div></div>
-                <div class="row g-2 mb-2">
-                <div class="col-md-8">
-                    <input type="text" id="a2" name="vquestion" placeholder="Варианты ответов" class="form-control" required>
-                </div>
-                <div class="col md-4">
-                    <input type="text" id="b2" name="res" placeholder="Количество баллов" class="form-control" required>
-                </div>
-                </div>
-                <input type="button" class="btn btn-warning mt-3" value="Добавить вопрос" id="badd">
-                <input type="button" class="btn btn-warning mt-3" value="Добавить вариант ответа">
+                <input type="button" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="vb()" id="b1">
             </div>
+            <input type="button" class="btn btn-dark mt-3 " value="Добавить вопрос">
         </form>
-        <button type="submit" class="btn btn-dark mt-4" form="test">Добавить тест</button>
+        <button type="submit" class="btn btn-dark mt-4" form="test">Создать тест</button>
     </div>
 
 </body>
