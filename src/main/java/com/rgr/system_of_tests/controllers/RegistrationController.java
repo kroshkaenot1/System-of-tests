@@ -15,7 +15,7 @@ public class RegistrationController {
     private UsersService usersService;
 
     @GetMapping("/registration")
-    public String reg(Model model){
+    public String reg(){
         return "registration";
     }
 

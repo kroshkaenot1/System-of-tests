@@ -30,7 +30,7 @@ public class Testcontroller {
     public String testMain(Model model){
         Iterable<Tests> tests = testsRepository.findAll();
         model.addAttribute("tests",tests);
-        return "test-main";
+        return "test_main";
     }
     @GetMapping("/test/{id}/edit")
     public String testEdit(@PathVariable(value = "id") long id, Model model){
@@ -41,7 +41,7 @@ public class Testcontroller {
         ArrayList<Tests> res = new ArrayList<>();
         test.ifPresent(res::add);
         model.addAttribute("test",res);
-        return "test-edit";
+        return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
     public String testUpd(@PathVariable(value = "id") long id, @RequestParam String title,@RequestParam String description){
@@ -53,12 +53,13 @@ public class Testcontroller {
     }
     @PostMapping("/test/{id}/remove")
     public String testRemove(@PathVariable(value = "id") long id){
+
         Tests test = testsRepository.findById(id).orElseThrow();
         testsRepository.delete(test);
         return "redirect:/test";
     }
     @GetMapping("/test/add")
-    public String testAdd(){return "test-add";}
+    public String testAdd(){return "test_add";}
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam String title,@RequestParam String description){
         Tests test = new Tests(title,description);
@@ -77,6 +78,6 @@ public class Testcontroller {
             }
         }
         model.addAttribute("tests",TestsForModel);
-        return "test-main";
+        return "test_main";
     }
 }

@@ -1,8 +1,8 @@
 package com.rgr.system_of_tests.controllers;
 
+import com.rgr.system_of_tests.repo.UsersRepository;
 import com.rgr.system_of_tests.repo.models.Roles;
 import com.rgr.system_of_tests.repo.models.Users;
-import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.management.relation.Role;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,6 @@ public class AdminController {
         model.addAttribute("users",users);
         return "admin";}
 
-
     @GetMapping("/admin/{id}/edit")
     public String adminEdit(@PathVariable(value="id")long id, Model model){
         Optional<Users> user = usersRepository.findById(id);
@@ -34,7 +32,7 @@ public class AdminController {
         user.ifPresent(res::add);
         model.addAttribute("user",res);
         model.addAttribute("roles",Roles.values());
-        return "admin-edit";}
+        return "admin_edit";}
     @PostMapping("/admin/{id}/edit")
     public String adminUpd(@PathVariable(value="id")long id,
                            @RequestParam Map<String, String> form){
