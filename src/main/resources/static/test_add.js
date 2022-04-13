@@ -39,7 +39,7 @@ buttonAddQ.onclick = function createQuestion(){
     divScore1.setAttribute('class','col md-4');
 
     let inputScore1 = document.createElement('input');
-    inputScore1.setAttribute('type','text');
+    inputScore1.setAttribute('type','number');
     inputScore1.setAttribute('placeholder','Количество баллов');
     inputScore1.setAttribute('class','form-control');
     inputScore1.setAttribute('name','b'+count+'1');
@@ -67,7 +67,7 @@ buttonAddQ.onclick = function createQuestion(){
     divScore2.setAttribute('class','col md-4');
 
     let inputScore2 = document.createElement('input');
-    inputScore2.setAttribute('type','text');
+    inputScore2.setAttribute('type','number');
     inputScore2.setAttribute('placeholder','Количество баллов');
     inputScore2.setAttribute('class','form-control');
     inputScore2.setAttribute('name','b'+count+'2');

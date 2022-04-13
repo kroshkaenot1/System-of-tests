@@ -1,5 +1,9 @@
 package com.rgr.system_of_tests.controllers;
 
+import com.rgr.system_of_tests.repo.AnswerRepository;
+import com.rgr.system_of_tests.repo.QuestionRepository;
+import com.rgr.system_of_tests.repo.models.Answer;
+import com.rgr.system_of_tests.repo.models.Question;
 import com.rgr.system_of_tests.repo.models.Test;
 import com.rgr.system_of_tests.repo.TestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class Testcontroller {
+    @Autowired
+    private QuestionRepository questionRepository;
+    @Autowired
+    private AnswerRepository answerRepository;
     @Autowired
     private TestsRepository testsRepository;
     @GetMapping("/")
@@ -61,9 +66,35 @@ public class Testcontroller {
     @GetMapping("/test/add")
     public String testAdd(){return "test_add";}
     @PostMapping("/test/add")
-    public String testPostAdd(@RequestParam String title,@RequestParam String description){
+    public String testPostAdd(@RequestParam Map<String, String> form,@RequestParam String title,@RequestParam String description,Model model){
         Test test = new Test(title,description);
         testsRepository.save(test);
+        int q_count = 1;
+        int a_count = 1;
+        Long last_id_q = null;
+        int ball = 0;
+        for(String key : form.keySet()){
+            if(key.equals("a"+q_count+a_count)){
+                try{
+                    ball = Integer.parseInt(form.get("b"+q_count+a_count));
+                }catch (NumberFormatException e){
+                    model.addAttribute("message","Некорректно введены баллы за ответ!");
+                    return "test_add";
+                }
+                Answer answer = new Answer(last_id_q,form.get(key),ball);
+                answerRepository.save(answer);
+                a_count++;
+                if(a_count==3){
+                    if(!form.containsKey("a"+q_count+a_count)){q_count++; a_count=1;}
+                }
+                if(a_count==4){a_count=1;q_count++;}
+            }
+            if(key.equals("q"+q_count)){
+                Question question = new Question(test.getId(),form.get(key));
+                questionRepository.save(question);
+                last_id_q =question.getId();
+            }
+        }
         return "redirect:/test";
     }
     @PostMapping("/test")

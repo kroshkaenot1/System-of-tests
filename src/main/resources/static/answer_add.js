@@ -19,7 +19,7 @@ function addAnsw(button){
     divScore.setAttribute('class','col md-4');
 
     let inputScore = document.createElement('input');
-    inputScore.setAttribute('type','text');
+    inputScore.setAttribute('type','number');
     inputScore.setAttribute('placeholder','Количество баллов');
     inputScore.setAttribute('class','form-control');
     inputScore.setAttribute('name','b'+id[7]+'3');
