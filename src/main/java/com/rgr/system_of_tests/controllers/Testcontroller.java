@@ -4,6 +4,7 @@ import com.rgr.system_of_tests.repo.AnswerRepository;
 import com.rgr.system_of_tests.repo.QuestionRepository;
 import com.rgr.system_of_tests.repo.models.Answer;
 import com.rgr.system_of_tests.repo.models.Question;
+import com.rgr.system_of_tests.repo.models.QuestionModel;
 import com.rgr.system_of_tests.repo.models.Test;
 import com.rgr.system_of_tests.repo.TestsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +111,37 @@ public class Testcontroller {
         }
         model.addAttribute("tests",TestsForModel);
         return "test_main";
+    }
+    @GetMapping("/test/{id}")
+    public String testView(@PathVariable(value = "id") long id,Model model){
+        Test test = testsRepository.findId(id);
+        model.addAttribute("test",test);
+
+        List<Question> questions = questionRepository.findByTestId(id);
+        model.addAttribute("questions",questions);
+
+        ArrayList<QuestionModel> qm = new ArrayList<>();
+        for(Question q : questions){
+            List<Answer>  answers = answerRepository.findId(q.getId());
+            try{
+                QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),answers.get(2).getAnswer(),
+                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId());
+                qm.add(questionModel);
+            }catch (IndexOutOfBoundsException e){
+                QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),null,
+                        answers.get(0).getId(),answers.get(1).getId(),null);
+                qm.add(questionModel);
+            }
+        }
+        model.addAttribute("answers",qm);
+        return "test";
+    }
+    @PostMapping("/test/{id}")
+    public String testResult(@PathVariable(value = "id") long id,Model model,@RequestParam Map<String, String> form){
+        for(String key: form.keySet()){
+            System.out.println(key + "----------------"+form.get(key));
+        }
+
+        return "redirect:/test";
     }
 }

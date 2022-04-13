@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public interface TestsRepository extends CrudRepository<Test,Long> {
-    @Query(value = "SELECT t FROM Test t WHERE DATE(t.date) =?1")
+    @Query("SELECT t FROM Test t WHERE DATE(t.date) =?1")
     ArrayList<Test> findByDate(Date date);
+    @Query("SELECT t FROM Test t WHERE t.id=?1")
+    Test findId(long id);
 }

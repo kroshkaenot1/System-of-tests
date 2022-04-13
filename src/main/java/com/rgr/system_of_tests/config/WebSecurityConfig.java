@@ -24,6 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/test").authenticated()
+                .antMatchers("/test/*").authenticated()
                 .antMatchers("/test/*/edit").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
                 .antMatchers("/test/*/remove").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
                 .antMatchers("/test/add").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())

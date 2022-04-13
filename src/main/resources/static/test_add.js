@@ -43,6 +43,7 @@ buttonAddQ.onclick = function createQuestion(){
     inputScore1.setAttribute('placeholder','Количество баллов');
     inputScore1.setAttribute('class','form-control');
     inputScore1.setAttribute('name','b'+count+'1');
+    inputScore1.setAttribute('value','0');
     inputScore1.required;
 
     divVar1.appendChild(inputVar1);
@@ -71,6 +72,7 @@ buttonAddQ.onclick = function createQuestion(){
     inputScore2.setAttribute('placeholder','Количество баллов');
     inputScore2.setAttribute('class','form-control');
     inputScore2.setAttribute('name','b'+count+'2');
+    inputScore2.setAttribute('value','0');
     inputScore2.required;
 
     divVar2.appendChild(inputVar2);

@@ -23,6 +23,7 @@ function addAnsw(button){
     inputScore.setAttribute('placeholder','Количество баллов');
     inputScore.setAttribute('class','form-control');
     inputScore.setAttribute('name','b'+id[7]+'3');
+    inputScore.setAttribute('value','0');
     inputScore.required;
 
     divVar.appendChild(inputVar);
