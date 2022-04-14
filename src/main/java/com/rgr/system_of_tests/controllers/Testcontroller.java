@@ -68,6 +68,7 @@ public class Testcontroller {
     public String testAdd(){return "test_add";}
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam Map<String, String> form,@RequestParam String title,@RequestParam String description,Model model){
+
         Test test = new Test(title,description);
         testsRepository.save(test);
         int q_count = 1;
@@ -121,15 +122,16 @@ public class Testcontroller {
         model.addAttribute("questions",questions);
 
         ArrayList<QuestionModel> qm = new ArrayList<>();
+
         for(Question q : questions){
             List<Answer>  answers = answerRepository.findId(q.getId());
             try{
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),answers.get(2).getAnswer(),
-                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId());
+                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId());
                 qm.add(questionModel);
             }catch (IndexOutOfBoundsException e){
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),null,
-                        answers.get(0).getId(),answers.get(1).getId(),null);
+                        answers.get(0).getId(),answers.get(1).getId(),null,q.getId());
                 qm.add(questionModel);
             }
         }

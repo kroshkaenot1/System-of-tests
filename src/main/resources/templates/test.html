@@ -16,14 +16,14 @@
                 <p th:text="${a.getQuestion_text()}"></p>
                 <div>
                     <div>
-                        <label th:text="${a.getAnswer1()}" th:for="${a.getAnswId1()}"></label>
-                        <input type="checkbox" th:name="${a.getAnswId1()}" th:id="${a.getAnswId1()}" ></div>
+                        <label th:text="${a.getAnswer1()}" th:for="${a.getQ_id()}"></label>
+                        <input type="radio" th:name="${a.getQ_id()}" th:id="${a.getQ_id()}" th:value="${a.getAnswId1()}"></div>
                     <div>
-                        <label th:text="${a.getAnswer2()}" th:for="${a.getAnswId2()}"></label>
-                        <input type="checkbox" th:name="${a.getAnswId2()}" th:id="${a.getAnswId2()}"></div>
+                        <label th:text="${a.getAnswer2()}" th:for="${a.getQ_id()}"></label>
+                        <input type="radio" th:name="${a.getQ_id()}" th:id="${a.getQ_id()}" th:value="${a.getAnswId2()}"></div>
                     <div th:if="${a.getAnswer3()!=null}">
-                        <label th:text="${a.getAnswer3()}" th:for="${a.getAnswId3()}"></label>
-                        <input type="checkbox" th:name="${a.getAnswId3()}" th:id="${a.getAnswId3()}"></div>
+                        <label th:text="${a.getAnswer3()}" th:for="${a.getQ_id()}"></label>
+                        <input type="radio" th:name="${a.getQ_id()}" th:id="${a.getQ_id()}" th:value="${a.getAnswId3()}"></div>
                 </div>
             </div>
         </div>

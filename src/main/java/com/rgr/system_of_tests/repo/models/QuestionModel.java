@@ -4,8 +4,9 @@ public class QuestionModel {
     private String question_text;
     private String answer1,answer2,answer3;
     private Long answId1,answId2,answId3;
+    private Long q_id;
 
-    public QuestionModel(String question_text, String answer1, String answer2, String answer3, Long answId1, Long answId2, Long answId3) {
+    public QuestionModel(String question_text, String answer1, String answer2, String answer3, Long answId1, Long answId2, Long answId3, Long q_id) {
         this.question_text = question_text;
         this.answer1 = answer1;
         this.answer2 = answer2;
@@ -13,6 +14,15 @@ public class QuestionModel {
         this.answId1 = answId1;
         this.answId2 = answId2;
         this.answId3 = answId3;
+        this.q_id = q_id;
+    }
+
+    public Long getQ_id() {
+        return q_id;
+    }
+
+    public void setQ_id(Long q_id) {
+        this.q_id = q_id;
     }
 
     public Long getAnswId1() {
