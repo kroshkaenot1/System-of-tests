@@ -25,7 +25,8 @@ public class RegistrationController {
            model.addAttribute("message","Пользователь существует!");
            return "registration";
        }
-       return "redirect:/login";
+       model.addAttribute("message","Проверьте свою почту и перейдите по ссылке в письме для активации профиля");
+       return "login";
     }
 
     @GetMapping("/activate/{code}")
