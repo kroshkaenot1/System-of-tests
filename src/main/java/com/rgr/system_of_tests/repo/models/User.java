@@ -14,9 +14,26 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String username,password,firstname,lastname;
+    private String username,password,firstname,lastname,patronymic;
     private boolean active;
     private String ActivationCode;
+    private String dateOfBirth;
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getActivationCode() {
         return ActivationCode;

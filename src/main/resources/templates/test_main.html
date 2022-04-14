@@ -10,7 +10,7 @@
 <div th:insert ="blocks/header::header"></div>
 <div class="container mt-5">
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 row" action="" method="post">
-        <input type="search" class="form-control form-control-dark col" placeholder="Search..." aria-label="Search" id="input" name="search">
+        <input type="search" class="form-control form-control-dark col" placeholder="Поиск..." aria-label="Search" id="input" name="search">
         <input type="date" id="date" class="col-md-2" name="date" required>
         <button type="submit"  class="btn btn-dark col-md-2">Найти</button>
     </form>
@@ -20,8 +20,8 @@
         <p class="desc"  th:text ="${el.getDescription()}"/>
         <form th:action="'/test/' +${el.getId()}+ '/remove'" method="post" id="remove"></form>
         <a th:href="'/test/' +${el.getId()}" class="btn btn-warning">Пройти тест</a>
-        <a sec:authorize="hasAuthority('TESTER')" th:href="'/test/' +${el.getId()}+ '/edit'" class="btn btn-warning">Редактировать</a>
-        <button type="submit" sec:authorize="hasAuthority('TESTER')" class="btn btn-warning" form="remove">Удалить</button>
+        <a sec:authorize="hasAnyAuthority('TESTER','ADMIN')" th:href="'/test/' +${el.getId()}+ '/edit'" class="btn btn-warning">Редактировать</a>
+        <button type="submit" sec:authorize="hasAnyAuthority('TESTER','ADMIN')" class="btn btn-warning" form="remove">Удалить</button>
     </div>
 </div>
 </body>
