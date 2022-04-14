@@ -2,11 +2,10 @@ package com.rgr.system_of_tests.controllers;
 
 import com.rgr.system_of_tests.repo.AnswerRepository;
 import com.rgr.system_of_tests.repo.QuestionRepository;
-import com.rgr.system_of_tests.repo.models.Answer;
-import com.rgr.system_of_tests.repo.models.Question;
-import com.rgr.system_of_tests.repo.models.QuestionModel;
-import com.rgr.system_of_tests.repo.models.Test;
 import com.rgr.system_of_tests.repo.TestsRepository;
+import com.rgr.system_of_tests.repo.UsersRepository;
+import com.rgr.system_of_tests.repo.models.*;
+import com.rgr.system_of_tests.service.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +27,10 @@ public class Testcontroller {
     private AnswerRepository answerRepository;
     @Autowired
     private TestsRepository testsRepository;
+    @Autowired
+    private MailSender mailSender;
+    @Autowired
+    private UsersRepository usersRepository;
     @GetMapping("/")
     public String home(){
         return "home";
@@ -124,7 +127,7 @@ public class Testcontroller {
         ArrayList<QuestionModel> qm = new ArrayList<>();
 
         for(Question q : questions){
-            List<Answer>  answers = answerRepository.findId(q.getId());
+            List<Answer>  answers = answerRepository.findByQuestionId(q.getId());
             try{
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),answers.get(2).getAnswer(),
                         answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId());
@@ -140,10 +143,42 @@ public class Testcontroller {
     }
     @PostMapping("/test/{id}")
     public String testResult(@PathVariable(value = "id") long id,Model model,@RequestParam Map<String, String> form){
-        for(String key: form.keySet()){
-            System.out.println(key + "----------------"+form.get(key));
+        int result=0;
+        Test test = testsRepository.findId(id);
+        int max=0;
+        String name = "";
+        String email = "";
+        List<Answer> answers = answerRepository.findAllByTest(id);
+        for(Answer a : answers){
+           max+=a.getScore();
         }
+        for(String key: form.keySet()){
+            if(key.equals("userId")){
+                email = form.get(key);
+                User user = usersRepository.findByName(email);
+                name = user.getFirstname();
+                continue;}
+            Long b = Long.parseLong(form.get(key));
+            Answer answer = answerRepository.findBy_Id(b);
+            result+=answer.getScore();
+        }
+        String message = String.format(
+                "%s, вы набрали %s баллов из %s возможных",
+                name,
+                result,
+                max
+        );
+        String messageForEmail = String.format(
+                "%s.\n"+
+                    "%s, вы набрали %s баллов из %s возможных",
+                    test.getTitle(),
+                    name,
+                    result,
+                    max
 
-        return "redirect:/test";
+        );
+        model.addAttribute("message",message);
+        mailSender.send(email,"Результат тестированя",messageForEmail);
+        return "test_result";
     }
 }

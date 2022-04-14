@@ -34,15 +34,13 @@ public class UsersService implements UserDetailsService {
         user.setActive(false);
         user.setActivationCode(UUID.randomUUID().toString());
         usersRepository.save(user);
-        if(!StringUtils.isEmpty(user.getUsername())){
-            String message = String.format(
-                    "Доброго времени суток,%s \n"+
-                            "Пожалуйста, пройдите по ссылке для активации аккаунта: http://localhost:8080/activate/%s",
-                    user.getFirstname(),
-                    user.getActivationCode()
-            );
-            mailSender.send(user.getUsername(),"Код активации",message);
-        }
+        String message = String.format(
+                "Доброго времени суток,%s \n"+
+                        "Пожалуйста, пройдите по ссылке для активации аккаунта: http://localhost:8080/activate/%s",
+                user.getFirstname(),
+                user.getActivationCode()
+        );
+        mailSender.send(user.getUsername(),"Код активации",message);
         return true;
     }
 
