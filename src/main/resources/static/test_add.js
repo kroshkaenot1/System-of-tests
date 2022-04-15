@@ -8,6 +8,15 @@ buttonAddQ.onclick = function createQuestion(){
 
     let childDiv = document.createElement('div');
     childDiv.setAttribute('id','qBody'+count);
+
+    let closeButton = document.createElement('input');
+    closeButton.setAttribute('type','button');
+    closeButton.setAttribute('class','btn-close btn-close-white');
+    closeButton.setAttribute('onclick','deleteQuestion(this)');
+    closeButton.setAttribute('name','closeQuest'+count);
+    closeButton.setAttribute('id','closeQuest'+count);
+    childDiv.appendChild(closeButton);
+
     questionDiv.appendChild(childDiv);
     let inputQ_t = document.createElement('input');
     inputQ_t.setAttribute('type','text');
@@ -15,12 +24,13 @@ buttonAddQ.onclick = function createQuestion(){
     inputQ_t.setAttribute('placeholder','Введите вопрос');
     inputQ_t.setAttribute('class','form-control mb-2');
     inputQ_t.setAttribute('name','q'+count);
+    inputQ_t.setAttribute('id','q'+count);
     inputQ_t.required;
-
     let inputImg = document.createElement('input');
     inputImg.setAttribute('type','file');
     inputImg.setAttribute('class','form-control mb-4');
     inputImg.setAttribute('name','img'+count);
+    inputImg.setAttribute('id','img'+count);
 
     let divR1 = document.createElement('div');
     divR1.setAttribute('class','row g-2 mb-2');
@@ -33,8 +43,8 @@ buttonAddQ.onclick = function createQuestion(){
     inputVar1.setAttribute('placeholder','Варинт ответа');
     inputVar1.setAttribute('class','form-control');
     inputVar1.setAttribute('name','a'+count+'1');
+    inputVar1.setAttribute('id','a'+count+'1');
     inputVar1.required;
-
     let divScore1 = document.createElement('div');
     divScore1.setAttribute('class','col md-4');
 
@@ -44,6 +54,7 @@ buttonAddQ.onclick = function createQuestion(){
     inputScore1.setAttribute('class','form-control');
     inputScore1.setAttribute('name','b'+count+'1');
     inputScore1.setAttribute('value','0');
+    inputScore1.setAttribute('id','b'+count+'1');
     inputScore1.required;
 
     divVar1.appendChild(inputVar1);
@@ -62,8 +73,8 @@ buttonAddQ.onclick = function createQuestion(){
     inputVar2.setAttribute('placeholder','Варинт ответа');
     inputVar2.setAttribute('class','form-control');
     inputVar2.setAttribute('name','a'+count+'2');
+    inputVar2.setAttribute('id','a'+count+'2');
     inputVar2.required;
-
     let divScore2 = document.createElement('div');
     divScore2.setAttribute('class','col md-4');
 
@@ -73,6 +84,7 @@ buttonAddQ.onclick = function createQuestion(){
     inputScore2.setAttribute('class','form-control');
     inputScore2.setAttribute('name','b'+count+'2');
     inputScore2.setAttribute('value','0');
+    inputScore2.setAttribute('id','b'+count+'2');
     inputScore2.required;
 
     divVar2.appendChild(inputVar2);
@@ -86,7 +98,6 @@ buttonAddQ.onclick = function createQuestion(){
     buttonAddAnsw.setAttribute('value','Добавить вариант ответа');
     buttonAddAnsw.setAttribute('onclick','addAnsw(this)');
     buttonAddAnsw.setAttribute('id','addansw'+count);
-
     childDiv.appendChild(inputQ_t);
     childDiv.appendChild(inputImg);
     childDiv.appendChild(divR1);
@@ -97,4 +108,117 @@ buttonAddQ.onclick = function createQuestion(){
     if(count==10){
         buttonAddQ.remove();
     }
+}
+function redefinition(id){
+    let t = 2;
+    let array = [];
+    for(let i=2;i<=count;i++){
+        let temp = document.getElementById(id+i);
+        if(temp!=null)
+            array.push(temp);
+    }
+    for(let i = 0;i<array.length;i++){
+        array[i].setAttribute('id',id+t);
+        if(id!="addansw")
+        array[i].setAttribute('name',id+t);
+        t++;
+    }
+
+}
+function deleteQuestion(button){
+    let n = button.getAttribute('name');
+    let num = Number(n[10]);
+    let answers = [];
+    let score = [];
+    let q = [];
+    let t = 2;
+
+    for(let i=2;i<=count;i++){
+        let temp = document.getElementById('qBody'+i);
+        if(temp!=null)
+        q.push(temp);
+    }
+    q[num-2].parentNode.remove();
+    q.splice(num-2,1);
+    for(let i = 0;i<q.length;i++){
+        q[i].setAttribute('id','qBody'+t);
+        t++;
+    }
+    t=2;
+    redefinition('addansw');
+    redefinition('closeQuest');
+    redefinition('q');
+    redefinition('img');
+    for(let i =2;i<=count;i++){
+        for(let j = 1;j<=3;j++){
+            let temp = document.getElementById('a'+i+j);
+            if(temp!=null){
+                answers.push(temp);
+            }
+        }
+    }
+    for(let i =2;i<=count;i++){
+        for(let j = 1;j<=3;j++){
+            let temp = document.getElementById('b'+i+j);
+            if(temp!=null){
+                score.push(temp);
+            }
+        }
+    }
+    for(let i = 0;i<answers.length;i++) {
+        let t1 = answers[i].getAttribute('name');
+        if (i + 1 < answers.length) {
+            let t2 = answers[i + 1].getAttribute('name');
+            if (i + 2 < answers.length) {
+                let t3 = answers[i + 2].getAttribute('name');
+                if (t1[1] == t2[1] && t2[1] == t3[1]) {
+                    answers[i].setAttribute('name', 'a' + t + '1');
+                    answers[i + 1].setAttribute('name', 'a' + t + '2');
+                    answers[i + 2].setAttribute('name', 'a' + t + '3');
+                    answers[i].setAttribute('id', 'a' + t + '1');
+                    answers[i + 1].setAttribute('id', 'a' + t + '2');
+                    answers[i + 2].setAttribute('id', 'a' + t + '3');
+                    i++;
+                    t++;
+                    continue;
+                }
+            }
+            if (t1[1] == t2[1]) {
+                answers[i].setAttribute('name', 'a' + t + '1');
+                answers[i + 1].setAttribute('name', 'a' + t + '2');
+                answers[i].setAttribute('id', 'a' + t + '1');
+                answers[i + 1].setAttribute('id', 'a' + t + '2');
+                t++;
+            }
+        }
+    }
+    t = 2;
+    for(let i = 0;i<score.length;i++) {
+        let t1 = score[i].getAttribute('name');
+        if (i + 1 < score.length) {
+            let t2 = score[i + 1].getAttribute('name');
+            if (i + 2 < score.length) {
+                let t3 = score[i + 2].getAttribute('name');
+                if (t1[1] == t2[1] && t2[1] == t3[1]) {
+                    score[i].setAttribute('name', 'b' + t + '1');
+                    score[i + 1].setAttribute('name', 'b' + t + '2');
+                    score[i + 2].setAttribute('name', 'b' + t + '3');
+                    score[i].setAttribute('id', 'b' + t + '1');
+                    score[i + 1].setAttribute('id', 'b' + t + '2');
+                    score[i + 2].setAttribute('id', 'b' + t + '3');
+                    i++;
+                    t++;
+                    continue;
+                }
+            }
+            if (t1[1] == t2[1]) {
+                score[i].setAttribute('name', 'b' + t + '1');
+                score[i + 1].setAttribute('name', 'b' + t + '2');
+                score[i].setAttribute('id', 'b' + t + '1');
+                score[i + 1].setAttribute('id', 'b' + t + '2');
+                t++;
+            }
+        }
+    }
+    count--;
 }

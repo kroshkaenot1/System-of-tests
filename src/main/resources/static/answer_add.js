@@ -13,6 +13,7 @@ function addAnsw(button){
     inputVar.setAttribute('placeholder','Варинт ответа');
     inputVar.setAttribute('class','form-control');
     inputVar.setAttribute('name','a'+id[7]+'3');
+    inputVar.setAttribute('id','a'+id[7]+'3');
     inputVar.required;
 
     let divScore = document.createElement('div');
@@ -24,12 +25,27 @@ function addAnsw(button){
     inputScore.setAttribute('class','form-control');
     inputScore.setAttribute('name','b'+id[7]+'3');
     inputScore.setAttribute('value','0');
+    inputScore.setAttribute('id','b'+id[7]+'3');
     inputScore.required;
+    let divClose = document.createElement('div');
+    divClose.setAttribute('class','col');
+
+    let closeButton = document.createElement('input');
+    closeButton.setAttribute('type','button');
+    closeButton.setAttribute('class','btn-close btn-close-white');
+    closeButton.setAttribute('onclick','deleteVar(this)');
+
+    divClose.appendChild(closeButton);
 
     divVar.appendChild(inputVar);
     divScore.appendChild(inputScore);
     divR.appendChild(divVar);
     divR.appendChild(divScore);
+    divR.appendChild(divClose);
     qBody.appendChild(divR);
     button.remove();
+}
+function deleteVar(button){
+
+
 }
