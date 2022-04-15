@@ -1,11 +1,9 @@
 package com.rgr.system_of_tests.controllers;
 
-import com.rgr.system_of_tests.repo.AnswerRepository;
-import com.rgr.system_of_tests.repo.QuestionRepository;
-import com.rgr.system_of_tests.repo.TestsRepository;
-import com.rgr.system_of_tests.repo.UsersRepository;
+import com.rgr.system_of_tests.repo.*;
 import com.rgr.system_of_tests.repo.models.*;
 import com.rgr.system_of_tests.service.MailSender;
+import com.rgr.system_of_tests.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +19,10 @@ import java.util.*;
 
 @Controller
 public class Testcontroller {
-
+    @Autowired
+    private InvitationRepository invitationRepository;
+    @Autowired
+    private UsersService usersService;
     @Autowired
     private QuestionRepository questionRepository;
     @Autowired
@@ -73,13 +74,18 @@ public class Testcontroller {
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam Map<String, String> form,@RequestParam String title,@RequestParam String description,Model model){
 
-        Test test = new Test(title,description);
+        Test test = new Test(title,description,false);
         testsRepository.save(test);
         int q_count = 1;
         int a_count = 1;
         Long last_id_q = null;
         int ball = 0;
         for(String key : form.keySet()){
+            if(key.equals("isPrivate")){
+                if(form.get(key).equals("private")){
+                    test.setPrivate(true);
+                }
+            }
             if(key.equals("a"+q_count+a_count)){
                 try{
                     ball = Integer.parseInt(form.get("b"+q_count+a_count));
@@ -120,8 +126,14 @@ public class Testcontroller {
     @GetMapping("/test/{id}")
     public String testView(@PathVariable(value = "id") long id,Model model){
         Test test = testsRepository.findId(id);
+        if(test.getPrivate()){
+            User user = usersRepository.findByUsername(usersService.getCurrentUsername());
+            Invitation invitation = invitationRepository.findId(test.getId(),user.getId());
+            if(invitation==null){
+                return "redirect:/test";
+            }
+        }
         model.addAttribute("test",test);
-
         List<Question> questions = questionRepository.findByTestId(id);
         model.addAttribute("questions",questions);
 
@@ -144,6 +156,7 @@ public class Testcontroller {
     }
     @PostMapping("/test/{id}")
     public String testResult(@PathVariable(value = "id") long id,Model model,@RequestParam Map<String, String> form){
+
         int result=0;
         Test test = testsRepository.findId(id);
         int max=0;
@@ -180,6 +193,7 @@ public class Testcontroller {
         );
         model.addAttribute("message",message);
         mailSender.send(email,"Результат тестированя",messageForEmail);
+
         return "test_result";
     }
 }

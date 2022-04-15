@@ -13,15 +13,25 @@ public class Test {
     private Long id;
     private String title,description;
     private LocalDateTime date;
+    private Boolean isPrivate;
 
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public Test(String title, String description) {
+    public Boolean getPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(Boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public Test(String title, String description, Boolean isPrivate) {
         this.title = title;
         this.description = description;
-        this.date = LocalDateTime.now();
+        this.date = LocalDateTime.now();;
+        this.isPrivate = isPrivate;
     }
 
     public LocalDateTime getDate() {

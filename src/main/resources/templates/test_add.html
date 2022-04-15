@@ -12,13 +12,11 @@
         <form action="/test/add" method="post" id="test">
             <input type="text" name="title" placeholder="Введите название" class="form-control" required><br>
             <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea><br>
+            <input type="radio" id="private" name="isPrivate" value="private">
+            <lable for="private">Закрытый тест</lable>
+            <input type="radio" id="open" name="isPrivate" value="open" checked>
+            <label for="open">Открытый тест</label>
             <div class="p-3 mb-2 bg-dark text-white">
-                <input type="radio" id="private" name="isPrivate" value="private">
-                <lable for="private">Закрытый тест</lable>
-                <input type="radio" id="open" name="isPrivate" value="open">
-                <label for="open">Открытый тест</label>
-
-
                 <div id="qBody1">
                     <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
                     <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
