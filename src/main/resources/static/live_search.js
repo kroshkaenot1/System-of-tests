@@ -1,5 +1,4 @@
 document.querySelector('#input').oninput = function () {
-
     let value = this.value.trim().toLowerCase();
     let list = document.querySelectorAll('.test');
     if(value!=''){

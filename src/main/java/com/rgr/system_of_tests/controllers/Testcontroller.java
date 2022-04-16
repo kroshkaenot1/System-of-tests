@@ -73,7 +73,6 @@ public class Testcontroller {
     public String testAdd(){return "test_add";}
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam Map<String, String> form,@RequestParam String title,@RequestParam String description,Model model){
-
         Test test = new Test(title,description,false);
         testsRepository.save(test);
         int q_count = 1;
@@ -126,8 +125,8 @@ public class Testcontroller {
     @GetMapping("/test/{id}")
     public String testView(@PathVariable(value = "id") long id,Model model){
         Test test = testsRepository.findId(id);
+        User user = usersRepository.findByUsername(usersService.getCurrentUsername());
         if(test.getPrivate()){
-            User user = usersRepository.findByUsername(usersService.getCurrentUsername());
             Invitation invitation = invitationRepository.findId(test.getId(),user.getId());
             if(invitation==null){
                 return "redirect:/test";

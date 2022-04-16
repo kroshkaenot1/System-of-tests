@@ -1,7 +1,6 @@
 let test = document.querySelector('#test');
 let count = 1;
-let buttonAddQ = document.querySelector('#b1');
-buttonAddQ.onclick = function createQuestion(){
+function createQuestion(buttonAddQ){
     count++;
     let questionDiv = document.createElement('div');
     questionDiv.setAttribute('class','p-3 mb-2 bg-dark text-white');
@@ -125,14 +124,28 @@ function redefinition(id){
     }
 
 }
+function createButtonAdd(){
+    let mainDiv = document.querySelector('#main');
+    let add = document.createElement('input');
+    add.setAttribute('type','button');
+    add.setAttribute('class','btn btn-dark mt-4');
+    add.setAttribute('value','Добавить вопрос');
+    add.setAttribute('id','b1');
+    add.setAttribute('onclick','createQuestion(this)');
+    mainDiv.appendChild(add);
+}
 function deleteQuestion(button){
     let n = button.getAttribute('name');
     let num = Number(n[10]);
+    let num10 = Number(n[10]+n[11]);
+    alert(num);
     let answers = [];
     let score = [];
     let q = [];
     let t = 2;
-
+    if(num10==10){
+        num=10;
+    }
     for(let i=2;i<=count;i++){
         let temp = document.getElementById('qBody'+i);
         if(temp!=null)
@@ -221,4 +234,7 @@ function deleteQuestion(button){
         }
     }
     count--;
+    if(count==9){
+        createButtonAdd();
+    }
 }

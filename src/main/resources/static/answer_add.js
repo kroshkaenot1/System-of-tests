@@ -4,6 +4,7 @@ function addAnsw(button){
 
     let divR = document.createElement('div');
     divR.setAttribute('class','row g-2 mb-2');
+    divR.setAttribute('id','third'+id[7]);
 
     let divVar = document.createElement('div');
     divVar.setAttribute('class','col-md-8');
@@ -34,6 +35,7 @@ function addAnsw(button){
     closeButton.setAttribute('type','button');
     closeButton.setAttribute('class','btn-close btn-close-white');
     closeButton.setAttribute('onclick','deleteVar(this)');
+    closeButton.setAttribute('id','deleteVar'+id[7]);
 
     divClose.appendChild(closeButton);
 
@@ -46,6 +48,13 @@ function addAnsw(button){
     button.remove();
 }
 function deleteVar(button){
-
-
+    let id = button.id;
+    document.querySelector('#third'+id[9]).remove();
+    let buttonAddAnsw = document.createElement('input');
+    buttonAddAnsw.setAttribute('type','button');
+    buttonAddAnsw.setAttribute('class','btn btn-warning mt-3');
+    buttonAddAnsw.setAttribute('value','Добавить вариант ответа');
+    buttonAddAnsw.setAttribute('onclick','addAnsw(this)');
+    buttonAddAnsw.setAttribute('id','addansw'+id[9]);
+    document.querySelector('#qBody'+id[9]).parentNode.appendChild(buttonAddAnsw);
 }
