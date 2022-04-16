@@ -40,6 +40,16 @@ public class Testcontroller {
 
         Test test = testService.getTestById(id);
         model.addAttribute("test",test);
+
+        List<Question> questions = questionService.getQuestionsById(id);
+        model.addAttribute("questions",questions);
+
+        ArrayList<QuestionModel> qm = testService.testViewById(id);
+        if(qm==null){
+            return "redirect:/test";
+        }
+        model.addAttribute("questionModels",qm);
+
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
@@ -85,7 +95,7 @@ public class Testcontroller {
         if(qm==null){
             return "redirect:/test";
         }
-        model.addAttribute("answers",qm);
+        model.addAttribute("questionModels",qm);
         return "test";
     }
     @PostMapping("/test/{id}")
