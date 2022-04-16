@@ -12,7 +12,7 @@
     <div><p th:text="${el.getDescription()}"></p></div>
     <form th:action="'/test/' +${el.getId()}" method="post" id="test">
         <input hidden name="userId" th:value="${#httpServletRequest.remoteUser}">
-        <div class="p-3 mb-2 bg-dark text-white"th:each="a : ${questionModels}">
+        <div class="p-3 mb-2 bg-dark text-white qu"th:each="a : ${questionModels}">
             <div id="qBody">
                 <p th:text="${a.getQuestion_text()}"></p>
                 <div>

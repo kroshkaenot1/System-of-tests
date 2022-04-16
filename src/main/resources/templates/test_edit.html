@@ -9,67 +9,56 @@
     <div th:insert ="blocks/header::header"></div>
     <div class="container mt-5 mb-5">
         <h1>Редактирование теста</h1>
-            <div th:each="el : ${test}" class="container p-3 mb-2 bg-warning text-dark mt-5">
-                <form th:action="'/test/' +${el.getId()}+ '/edit'" method="post">
-                    <input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control" required><br>
-                    <textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/><br>
-
+            <div th:each="el : ${test}" class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
+                <form th:action="'/test/' +${el.getId()}+ '/edit'" method="post" id="test">
+                    <div><input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control" required></div>
+                    <div><textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/></div>
                     <div class="mb-2"><input type="radio" id="private" name="isPrivate" value="private">
                         <label for="private">Закрытый тест</label><br>
                         <input type="radio" id="open" name="isPrivate" value="open" checked>
                         <label for="open">Открытый тест</label>
                     </div>
-                    <div class="p-3 mb-2 bg-dark text-white"th:each="a : ${questionModels}">
-
-                        <div class="p-3 mb-2 bg-dark text-white">
-                            <div id="qBody1">
-                                <input type="text" th:value="${a.getQuestion_text()}" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
-                                <input type="file" class="form-control mb-4" name="img1">
+                    <div class="p-3 mb-2 bg-dark text-white qu"th:each="a,state : ${questionModels}">
+                            <div th:id="'qBody'+${state.count}">
+                                <input th:if="${state.count>=2}" type="button" class="btn-close btn-close-white" onclick="deleteQuestion(this)" th:name="'closeQuest'+${state.count}" th:id="'closeQuest'+${state.count}">
+                                <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" th:id="'q'+${state.count}"  placeholder="Введите вопрос" class="form-control mb-2" required>
+                                <input type="file" class="form-control mb-4" th:name="'img'+${state.count}" th:id="'img'+${state.count}">
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer1()}" name="a11" placeholder="Варианты ответов" class="form-control" required>
+                                        <input type="text" th:value="${a.getAnswer1()}" th:name="'a'+${state.count}+'1'" th:id="'a'+${state.count}+'1'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" name="b11" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'1'" th:id="'b'+${state.count}+'1'" placeholder="Количество баллов" class="form-control" value="0" required>
                                     </div>
-
                                 </div>
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer2()}" name="a12" placeholder="Варианты ответов" class="form-control" required>
-
+                                        <input type="text" th:value="${a.getAnswer2()}" th:name="'a'+${state.count}+'2'" th:id="'a'+${state.count}+'2'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" name="b12" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'2'" th:id="'b'+${state.count}+'2'" placeholder="Количество баллов" class="form-control" value="0" required>
                                     </div>
                                 </div>
-                                <div class="row g-2 mb-2" th:if="${a.getAnswer3()!=null}">
+                                <div class="row g-2 mb-2" th:if="${a.getAnswer3()!=null}" th:id="'third'+${state.count}">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer3()}" name="a13" placeholder="Варианты ответов" class="form-control" required>
-
+                                        <input type="text" th:value="${a.getAnswer3()}" th:name="'a'+${state.count}+'3'" th:id="'a'+${state.count}+'3'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" name="b13" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'3'" th:id="'b'+${state.count}+'3'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                    </div>
+                                    <div class="col">
+                                        <input type="button" class="btn-close btn-close-white" onclick="deleteVar(this)" th:id="'deleteVar'+${state.count}">
                                     </div>
                                 </div>
-
                             </div>
-                            <input type="button" id="addansw1" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)">
+                            <input type="button" th:id="'addansw'+${state.count}" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)" th:if="${a.getAnswer3()==null}">
                         </div>
-
-                    </div>
-
-
-
-                    <button type="submit" class="btn btn-dark mt-4">Обновить</button>
                 </form>
-
+                <button type="submit" class="btn btn-dark mt-4" form="test">Обновить тест</button>
+                <input type="button" class="btn btn-dark mt-4" value="Добавить вопрос" id="b1" onclick="createQuestion(this)">
             </div>
-
-
-
     </div>
 </body>
-<script src="../test_add.js"></script>
-<script src="../answer_add.js"></script>
+<script src="/././test_add.js"></script>
+<script src="/././answer_add.js"></script>
 </html>

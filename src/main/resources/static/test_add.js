@@ -1,9 +1,10 @@
 let test = document.querySelector('#test');
-let count = 1;
+let count = document.querySelectorAll('.qu').length;
+
 function createQuestion(buttonAddQ){
     count++;
     let questionDiv = document.createElement('div');
-    questionDiv.setAttribute('class','p-3 mb-2 bg-dark text-white');
+    questionDiv.setAttribute('class','p-3 mb-2 bg-dark text-white qu');
 
     let childDiv = document.createElement('div');
     childDiv.setAttribute('id','qBody'+count);
@@ -109,20 +110,22 @@ function createQuestion(buttonAddQ){
     }
 }
 function redefinition(id){
-    let t = 2;
+    let t = 1;
     let array = [];
-    for(let i=2;i<=count;i++){
+    for(let i=1;i<=count;i++){
         let temp = document.getElementById(id+i);
-        if(temp!=null)
+        if(temp!=null){
             array.push(temp);
+        }
     }
+    if(id=="closeQuest"){t++};
     for(let i = 0;i<array.length;i++){
         array[i].setAttribute('id',id+t);
-        if(id!="addansw")
-        array[i].setAttribute('name',id+t);
+        if(id!="addansw"){
+            array[i].setAttribute('name',id+t);
+        }
         t++;
     }
-
 }
 function createButtonAdd(){
     let mainDiv = document.querySelector('#main');
@@ -138,31 +141,31 @@ function deleteQuestion(button){
     let n = button.getAttribute('name');
     let num = Number(n[10]);
     let num10 = Number(n[10]+n[11]);
-    alert(num);
     let answers = [];
     let score = [];
     let q = [];
-    let t = 2;
+    let t = 1;
     if(num10==10){
         num=10;
     }
-    for(let i=2;i<=count;i++){
+    for(let i=1;i<=count;i++){
         let temp = document.getElementById('qBody'+i);
         if(temp!=null)
         q.push(temp);
     }
-    q[num-2].parentNode.remove();
-    q.splice(num-2,1);
+    q[num-1].parentNode.remove();
+    q.splice(num-1,1);
     for(let i = 0;i<q.length;i++){
         q[i].setAttribute('id','qBody'+t);
         t++;
     }
-    t=2;
+    t=1;
     redefinition('addansw');
     redefinition('closeQuest');
     redefinition('q');
     redefinition('img');
-    for(let i =2;i<=count;i++){
+
+    for(let i =1;i<=count;i++){
         for(let j = 1;j<=3;j++){
             let temp = document.getElementById('a'+i+j);
             if(temp!=null){
@@ -170,7 +173,7 @@ function deleteQuestion(button){
             }
         }
     }
-    for(let i =2;i<=count;i++){
+    for(let i =1;i<=count;i++){
         for(let j = 1;j<=3;j++){
             let temp = document.getElementById('b'+i+j);
             if(temp!=null){
@@ -205,7 +208,7 @@ function deleteQuestion(button){
             }
         }
     }
-    t = 2;
+    t = 1;
     for(let i = 0;i<score.length;i++) {
         let t1 = score[i].getAttribute('name');
         if (i + 1 < score.length) {
