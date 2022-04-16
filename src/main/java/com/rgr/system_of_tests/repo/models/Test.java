@@ -30,7 +30,7 @@ public class Test {
     public Test(String title, String description, Boolean isPrivate) {
         this.title = title;
         this.description = description;
-        this.date = LocalDateTime.now();;
+        this.date = LocalDateTime.now();
         this.isPrivate = isPrivate;
     }
 

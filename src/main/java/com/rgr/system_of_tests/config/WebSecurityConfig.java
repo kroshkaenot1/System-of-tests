@@ -1,7 +1,7 @@
 package com.rgr.system_of_tests.config;
 
 import com.rgr.system_of_tests.repo.models.Role;
-import com.rgr.system_of_tests.service.UsersService;
+import com.rgr.system_of_tests.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UsersService usersService;
+    private UserService usersService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

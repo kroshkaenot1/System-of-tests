@@ -1,7 +1,7 @@
 package com.rgr.system_of_tests.controllers;
 
 import com.rgr.system_of_tests.repo.models.User;
-import com.rgr.system_of_tests.service.UsersService;
+import com.rgr.system_of_tests.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RegistrationController {
     @Autowired
-    private UsersService usersService;
+    private UserService usersService;
 
     @GetMapping("/registration")
     public String reg(){

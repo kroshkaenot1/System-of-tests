@@ -11,11 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class UsersService implements UserDetailsService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UsersRepository usersRepository;
     @Autowired
@@ -59,5 +59,34 @@ public class UsersService implements UserDetailsService {
         user.setActivationCode(null);
         usersRepository.save(user);
         return true;
+    }
+    public void deleteUser(long id) {
+        User user = usersRepository.findId(id);
+        usersRepository.delete(user);
+    }
+
+    public Iterable<User> getAllUsers() {
+        Iterable<User> users = usersRepository.findAll();
+        return users;
+    }
+
+    public User getUserById(long id) {
+        User user = usersRepository.findId(id);
+        return user;
+    }
+    public void editUserRoles(Map<String, String> form,long id){
+        Set<String> roles = Arrays.stream(Role.values())
+                .map(Role::name)
+                .collect(Collectors.toSet());
+
+        User user = usersRepository.findId(id);
+        user.getRoles().clear();
+
+        for(String key : form.keySet()){
+            if(roles.contains(key)){
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
+        usersRepository.save(user);
     }
 }
