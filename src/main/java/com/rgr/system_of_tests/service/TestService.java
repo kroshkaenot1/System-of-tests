@@ -34,11 +34,36 @@ public class TestService {
         Test test = testsRepository.findId(id);
         return test;
     }
-    public void EditTest(long id,String title,String description){
+    public void EditTest(long id,Map<String, String> form){
         Test test = testsRepository.findId(id);
-        test.setTitle(title);
-        test.setDescription(description);
-        testsRepository.save(test);
+        List<Question> q= questionRepository.findByTestId(test.getId());
+        questionRepository.deleteAll(q);
+        int q_count = 1;
+        int a_count = 1;
+        Long last_id_q = null;
+        int ball = 0;
+        for(String key : form.keySet()){
+            if(key.equals("isPrivate")){
+                if(form.get(key).equals("private")){
+                    test.setPrivate(true);
+                }
+            }
+            if(key.equals("a"+q_count+a_count)){
+                ball = Integer.parseInt(form.get("b"+q_count+a_count));
+                Answer answer = new Answer(last_id_q,form.get(key),ball);
+                answerRepository.save(answer);
+                a_count++;
+                if(a_count==3){
+                    if(!form.containsKey("a"+q_count+a_count)){q_count++; a_count=1;}
+                }
+                if(a_count==4){a_count=1;q_count++;}
+            }
+            if(key.equals("q"+q_count)){
+                    Question question = new Question(test.getId(),form.get(key));
+                    questionRepository.save(question);
+                    last_id_q =question.getId();
+            }
+        }
     }
     public void deleteTest(long id){
         Test test = testsRepository.findId(id);
@@ -135,6 +160,7 @@ public class TestService {
                 User user = usersRepository.findByName(email);
                 name = user.getFirstname();
                 continue;}
+
             Long b = Long.parseLong(form.get(key));
             Answer answer = answerRepository.findBy_Id(b);
             result+=answer.getScore();

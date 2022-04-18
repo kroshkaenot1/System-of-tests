@@ -13,4 +13,6 @@ public interface AnswerRepository extends CrudRepository<Answer,Long> {
     Answer findBy_Id(Long id);
     @Query("SELECT a FROM Answer a LEFT JOIN Question q ON q.id = a.question_id LEFT JOIN Test t ON t.id = q.test_id WHERE t.id=?1")
     List<Answer> findAllByTest(Long id);
+    @Query("SELECT a FROM Answer a where a.answer=?1")
+    Answer findByAnswer(String answer);
 }

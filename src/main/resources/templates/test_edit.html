@@ -20,38 +20,38 @@
                     </div>
                     <div class="p-3 mb-2 bg-dark text-white qu"th:each="a,state : ${questionModels}">
                             <div th:id="'qBody'+${state.count}">
-                                <input th:if="${state.count>=2}" type="button" class="btn-close btn-close-white" onclick="deleteQuestion(this)" th:name="'closeQuest'+${state.count}" th:id="'closeQuest'+${state.count}">
-                                <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" th:id="'q'+${state.count}"  placeholder="Введите вопрос" class="form-control mb-2" required>
-                                <input type="file" class="form-control mb-4" th:name="'img'+${state.count}" th:id="'img'+${state.count}">
+                                <input th:if="${state.count>=2}" type="button" class="btn-close btn-close-white" onclick="deleteQuestion(this)" th:name="'closeQuest'+${state.count}" >
+                                <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" placeholder="Введите вопрос" class="form-control mb-2" required>
+                                <input type="file" class="form-control mb-4" th:name="'img'+${state.count}" >
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer1()}" th:name="'a'+${state.count}+'1'" th:id="'a'+${state.count}+'1'" placeholder="Варианты ответов" class="form-control" required>
+                                        <input type="text" th:value="${a.getAnswer1()}" th:name="'a'+${state.count}+'1'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'1'" th:id="'b'+${state.count}+'1'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'1'" placeholder="Количество баллов" class="form-control" value="0" required>
                                     </div>
                                 </div>
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer2()}" th:name="'a'+${state.count}+'2'" th:id="'a'+${state.count}+'2'" placeholder="Варианты ответов" class="form-control" required>
+                                        <input type="text" th:value="${a.getAnswer2()}" th:name="'a'+${state.count}+'2'"  placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'2'" th:id="'b'+${state.count}+'2'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'2'"  placeholder="Количество баллов" class="form-control" value="0" required>
                                     </div>
                                 </div>
                                 <div class="row g-2 mb-2" th:if="${a.getAnswer3()!=null}" th:id="'third'+${state.count}">
                                     <div class="col-md-8">
-                                        <input type="text" th:value="${a.getAnswer3()}" th:name="'a'+${state.count}+'3'" th:id="'a'+${state.count}+'3'" placeholder="Варианты ответов" class="form-control" required>
+                                        <input type="text" th:value="${a.getAnswer3()}" th:name="'a'+${state.count}+'3'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'3'" th:id="'b'+${state.count}+'3'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'3'" placeholder="Количество баллов" class="form-control" value="0" required>
                                     </div>
                                     <div class="col">
-                                        <input type="button" class="btn-close btn-close-white" onclick="deleteVar(this)" th:id="'deleteVar'+${state.count}">
+                                        <input type="button" class="btn-close btn-close-white" onclick="deleteVar(this)" th:name="'deleteVar'+${state.count}">
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" th:id="'addansw'+${state.count}" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)" th:if="${a.getAnswer3()==null}">
+                            <input type="button" th:name="'addansw'+${state.count}" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)" th:if="${a.getAnswer3()==null}">
                         </div>
                 </form>
                 <button type="submit" class="btn btn-dark mt-4" form="test">Обновить тест</button>

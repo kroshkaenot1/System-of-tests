@@ -53,11 +53,8 @@ public class Testcontroller {
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
-    public String testUpd(@PathVariable(value = "id") long id,
-                          @RequestParam String title,
-                          @RequestParam String description){
-
-        testService.EditTest(id,title,description);
+    public String testUpd(@PathVariable(value = "id") long id,@RequestParam Map<String, String> form){
+        testService.EditTest(id,form);
         return "redirect:/test";
     }
     @PostMapping("/test/{id}/remove")
