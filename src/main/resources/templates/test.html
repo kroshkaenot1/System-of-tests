@@ -16,7 +16,7 @@
         <div class="p-3 mb-2 bg-dark text-white qu"th:each="a : ${questionModels}">
             <div id="qBody">
                 <p th:text="${a.getQuestion_text()}"></p>
-                <img th:src="'/img/'+${a.getFileName()}" class="img">
+                <img th:src="'/img/'+${a.getFileName()}" class="img" th:if="${a.getFileName()!=null}">
                 <div>
                     <div>
                         <label th:text="${a.getAnswer1()}" th:for="${a.getQ_id()}"></label>

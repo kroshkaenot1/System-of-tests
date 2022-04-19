@@ -8,37 +8,37 @@
     <title>Добавление теста</title>
 </head>
 <body class="bg-light">
-    <div th:insert ="blocks/header::header"></div>
-    <div class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
-        <h1 class="text-center">Создание теста</h1>
-        <form action="/test/add" method="post" id="test" enctype="multipart/form-data">
-            <div><input type="text" name="title" placeholder="Введите название" class="form-control" required></div>
-            <div><textarea name="description" placeholder="Введите описание" class="form-control" required></textarea></div>
-            <div><input type="radio" id="private" name="isPrivate" value="private">
-                <label for="private">Закрытый тест</label><br>
+<div th:insert ="blocks/header::header"></div>
+<div class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
+    <h1 class="text-center">Создание теста</h1>
+    <form action="/test/add" method="post" id="test" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Введите название" class="form-control" required>
+        <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea>
+        <div><input type="radio" id="private" name="isPrivate" value="private">
+            <label for="private">Закрытый тест</label><br>
             <input type="radio" id="open" name="isPrivate" value="open" checked>
-                <label for="open">Открытый тест</label>
+            <label for="open">Открытый тест</label>
+        </div>
+        <div class="checkselect">
+            <div th:each="el:${users}">
+                <input type="checkbox" name="names[]" th:value="${el.getId()}" th:id="${el.getUsername()}">
+                <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
             </div>
-            <div class="checkselect">
-                <div th:each="el:${users}">
-                    <input type="checkbox" name="names[]" th:value="${el.getUsername()}" th:id="${el.getUsername()}">
-                    <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
-                </div>
-            </div>
-            <div class="p-3 mb-2 bg-dark text-white qu">
-                <div id="qBody1">
-                    <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
-                    <input type="file" class="form-control mb-4" name="img1" >
-                    <div class="row g-2 mb-2">
+        </div>
+        <div class="p-3 mb-2 bg-dark text-white qu">
+            <div id="qBody1">
+                <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
+                <input type="file" class="form-control mb-4" name="img1">
+                <div class="row g-2 mb-2">
                     <div class="col-md-8">
                         <input type="text" name="a11" placeholder="Варианты ответов" class="form-control" required>
                     </div>
                     <div class="col md-4">
-                             <input type="number" name="b11" placeholder="Количество баллов" class="form-control" value="0" required>
+                        <input type="number" name="b11" placeholder="Количество баллов" class="form-control" value="0" required>
                     </div>
 
-                    </div>
-                    <div class="row g-2 mb-2">
+                </div>
+                <div class="row g-2 mb-2">
                     <div class="col-md-8">
                         <input type="text" name="a12" placeholder="Варианты ответов" class="form-control" required>
 
@@ -46,18 +46,18 @@
                     <div class="col md-4">
                         <input type="number" name="b12" placeholder="Количество баллов" class="form-control" value="0" required>
                     </div>
-                    </div>
                 </div>
-                <input type="button" name="addansw1" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)">
             </div>
-        </form>
-        <button type="submit" class="btn btn-dark mt-4" form="test">Создать тест</button>
-        <input type="button" class="btn btn-dark mt-4" value="Добавить вопрос" id="b1" onclick="createQuestion(this)">
-    </div>
-    <div th:text="${message}"></div>
+            <input type="button" name="addansw1" class="btn btn-warning mt-3" value="Добавить вариант ответа" onclick="addAnsw(this)">
+        </div>
+    </form>
+    <button type="submit" class="btn btn-dark mt-4" form="test">Создать тест</button>
+    <input type="button" class="btn btn-dark mt-4" value="Добавить вопрос" id="b1" onclick="createQuestion(this)">
+</div>
+<div th:text="${message}"></div>
 </body>
 <script src="../test_add.js"></script>
-<script src="../test_add_list.js"></script>
+<script src="../select.js"></script>
 <script src="../answer_add.js"></script>
 
 </html>

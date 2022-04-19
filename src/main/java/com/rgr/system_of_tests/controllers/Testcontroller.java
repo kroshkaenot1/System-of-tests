@@ -58,12 +58,18 @@ public class Testcontroller {
             return "redirect:/test";
         }
         model.addAttribute("questionModels",qm);
-
+        Iterable<User> users = usersService.getAllUsers();
+        model.addAttribute("users",users);
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
-    public String testUpd(@PathVariable(value = "id") long id,@RequestParam Map<String, String> form){
-        testService.EditTest(id,form);
+    public String testUpd(@PathVariable(value = "id") long id,@RequestParam Map<String, String> form,
+                          @RequestParam (value = "img1",required = false) MultipartFile img1,@RequestParam (value = "img2",required = false) MultipartFile img2,
+                          @RequestParam (value = "img3",required = false) MultipartFile img3,@RequestParam (value = "img4",required = false) MultipartFile img4,
+                          @RequestParam (value = "img5",required = false) MultipartFile img5,@RequestParam (value = "img6",required = false) MultipartFile img6,
+                          @RequestParam (value = "img7",required = false) MultipartFile img7,@RequestParam (value = "img8",required = false) MultipartFile img8,
+                          @RequestParam (value = "img9",required = false) MultipartFile img9,@RequestParam (value = "img10",required = false) MultipartFile img10) throws IOException {
+        testService.EditTest(id,form,img1,img2,img3,img4,img5,img6,img7,img8,img9,img10);
         return "redirect:/test";
     }
     @PostMapping("/test/{id}/remove")
@@ -80,10 +86,12 @@ public class Testcontroller {
 
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam Map<String, String> form,
-                              @RequestParam String title,
-                              @RequestParam String description,
-                              @RequestParam ("img1") MultipartFile file) throws IOException {
-        testService.addTest(form, title, description,file);
+                              @RequestParam (value = "img1",required = false) MultipartFile img1,@RequestParam (value = "img2",required = false) MultipartFile img2,
+                              @RequestParam (value = "img3",required = false) MultipartFile img3,@RequestParam (value = "img4",required = false) MultipartFile img4,
+                              @RequestParam (value = "img5",required = false) MultipartFile img5,@RequestParam (value = "img6",required = false) MultipartFile img6,
+                              @RequestParam (value = "img7",required = false) MultipartFile img7,@RequestParam (value = "img8",required = false) MultipartFile img8,
+                              @RequestParam (value = "img9",required = false) MultipartFile img9,@RequestParam (value = "img10",required = false) MultipartFile img10) throws IOException {
+        testService.addTest(form,img1,img2,img3,img4,img5,img6,img7,img8,img9,img10);
         return "redirect:/test";
 
     }

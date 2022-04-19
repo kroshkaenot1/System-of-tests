@@ -56,3 +56,13 @@ function deleteVar(button){
     buttonAddAnsw.setAttribute('name','addansw'+id[9]);
     document.querySelector('#qBody'+id[9]).parentNode.appendChild(buttonAddAnsw);
 }
+function deleteImg(button){
+    let name = button.id;
+    document.querySelector('#file'+name[9]).remove();
+    document.querySelector('input[type=hidden]').remove();
+    let fileadd = document.createElement('input');
+    fileadd.setAttribute('type','file');
+    fileadd.setAttribute('class','form-control mb-4');
+    fileadd.setAttribute('name','img'+name[9]);
+    document.querySelector('#f'+name[9]).appendChild(fileadd);
+}

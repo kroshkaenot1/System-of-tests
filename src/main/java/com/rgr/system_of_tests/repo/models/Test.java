@@ -14,7 +14,6 @@ public class Test {
     private String title,description;
     private LocalDateTime date;
     private Boolean isPrivate;
-
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
@@ -26,6 +25,7 @@ public class Test {
     public void setPrivate(Boolean aPrivate) {
         isPrivate = aPrivate;
     }
+
 
     public Test(String title, String description, Boolean isPrivate) {
         this.title = title;
