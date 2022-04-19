@@ -14,7 +14,7 @@ function addAnsw(button){
     inputVar.setAttribute('placeholder','Варинт ответа');
     inputVar.setAttribute('class','form-control');
     inputVar.setAttribute('name','a'+id[7]+'3');
-    inputVar.required;
+    inputVar.required= true;
 
     let divScore = document.createElement('div');
     divScore.setAttribute('class','col md-4');
@@ -25,7 +25,7 @@ function addAnsw(button){
     inputScore.setAttribute('class','form-control');
     inputScore.setAttribute('name','b'+id[7]+'3');
     inputScore.setAttribute('value','0');
-    inputScore.required;
+    inputScore.required = true;
     let divClose = document.createElement('div');
     divClose.setAttribute('class','col');
 
@@ -59,7 +59,6 @@ function deleteVar(button){
 function deleteImg(button){
     let name = button.id;
     document.querySelector('#file'+name[9]).remove();
-    document.querySelector('input[type=hidden]').remove();
     let fileadd = document.createElement('input');
     fileadd.setAttribute('type','file');
     fileadd.setAttribute('class','form-control mb-4');

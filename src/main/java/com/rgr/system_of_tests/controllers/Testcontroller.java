@@ -69,7 +69,7 @@ public class Testcontroller {
                           @RequestParam (value = "img5",required = false) MultipartFile img5,@RequestParam (value = "img6",required = false) MultipartFile img6,
                           @RequestParam (value = "img7",required = false) MultipartFile img7,@RequestParam (value = "img8",required = false) MultipartFile img8,
                           @RequestParam (value = "img9",required = false) MultipartFile img9,@RequestParam (value = "img10",required = false) MultipartFile img10) throws IOException {
-        testService.EditTest(id,form,img1,img2,img3,img4,img5,img6,img7,img8,img9,img10);
+        testService.EditTest(id, form, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10);
         return "redirect:/test";
     }
     @PostMapping("/test/{id}/remove")

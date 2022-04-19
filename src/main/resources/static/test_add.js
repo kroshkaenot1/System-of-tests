@@ -23,7 +23,8 @@ function createQuestion(buttonAddQ){
     inputQ_t.setAttribute('placeholder','Введите вопрос');
     inputQ_t.setAttribute('class','form-control mb-2');
     inputQ_t.setAttribute('name','q'+count);
-    inputQ_t.required;
+    inputQ_t.required = true;
+
     let inputImg = document.createElement('input');
     inputImg.setAttribute('type','file');
     inputImg.setAttribute('class','form-control mb-4');
@@ -40,7 +41,7 @@ function createQuestion(buttonAddQ){
     inputVar1.setAttribute('placeholder','Варинт ответа');
     inputVar1.setAttribute('class','form-control');
     inputVar1.setAttribute('name','a'+count+'1');
-    inputVar1.required;
+    inputVar1.required= true;
     let divScore1 = document.createElement('div');
     divScore1.setAttribute('class','col md-4');
 
@@ -50,7 +51,7 @@ function createQuestion(buttonAddQ){
     inputScore1.setAttribute('class','form-control');
     inputScore1.setAttribute('name','b'+count+'1');
     inputScore1.setAttribute('value','0');
-    inputScore1.required;
+    inputScore1.required= true;
 
     divVar1.appendChild(inputVar1);
     divScore1.appendChild(inputScore1);
@@ -68,7 +69,7 @@ function createQuestion(buttonAddQ){
     inputVar2.setAttribute('placeholder','Варинт ответа');
     inputVar2.setAttribute('class','form-control');
     inputVar2.setAttribute('name','a'+count+'2');
-    inputVar2.required;
+    inputVar2.required= true;
     let divScore2 = document.createElement('div');
     divScore2.setAttribute('class','col md-4');
 
@@ -78,7 +79,7 @@ function createQuestion(buttonAddQ){
     inputScore2.setAttribute('class','form-control');
     inputScore2.setAttribute('name','b'+count+'2');
     inputScore2.setAttribute('value','0');
-    inputScore2.required;
+    inputScore2.required= true;
 
     divVar2.appendChild(inputVar2);
     divScore2.appendChild(inputScore2);
