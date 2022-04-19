@@ -5,8 +5,9 @@ public class QuestionModel {
     private String answer1,answer2,answer3;
     private Long answId1,answId2,answId3;
     private Long q_id;
+    private String fileName;
 
-    public QuestionModel(String question_text, String answer1, String answer2, String answer3, Long answId1, Long answId2, Long answId3, Long q_id) {
+    public QuestionModel(String question_text, String answer1, String answer2, String answer3, Long answId1, Long answId2, Long answId3, Long q_id, String fileName) {
         this.question_text = question_text;
         this.answer1 = answer1;
         this.answer2 = answer2;
@@ -15,6 +16,15 @@ public class QuestionModel {
         this.answId2 = answId2;
         this.answId3 = answId3;
         this.q_id = q_id;
+        this.fileName = fileName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public Long getQ_id() {

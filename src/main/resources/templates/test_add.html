@@ -11,7 +11,7 @@
     <div th:insert ="blocks/header::header"></div>
     <div class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
         <h1 class="text-center">Создание теста</h1>
-        <form action="/test/add" method="post" id="test">
+        <form action="/test/add" method="post" id="test" enctype="multipart/form-data">
             <div><input type="text" name="title" placeholder="Введите название" class="form-control" required></div>
             <div><textarea name="description" placeholder="Введите описание" class="form-control" required></textarea></div>
             <div><input type="radio" id="private" name="isPrivate" value="private">

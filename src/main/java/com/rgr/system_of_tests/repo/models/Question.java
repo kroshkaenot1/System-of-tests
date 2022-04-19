@@ -12,7 +12,7 @@ public class Question {
     private Long id;
     private Long test_id;
     private String question_text;
-
+    private String filename;
     public Question(Long test_id, String question_text) {
         this.test_id = test_id;
         this.question_text = question_text;
@@ -42,5 +42,13 @@ public class Question {
 
     public void setQuestion_text(String question_text) {
         this.question_text = question_text;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

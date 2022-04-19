@@ -3,8 +3,12 @@ package com.rgr.system_of_tests.service;
 import com.rgr.system_of_tests.repo.*;
 import com.rgr.system_of_tests.repo.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +16,8 @@ import java.util.*;
 
 @Service
 public class TestService {
+    @Value("${upload.path}")
+    private String uploadPath;
     @Autowired
     private MailSender mailSender;
     @Autowired
@@ -69,7 +75,7 @@ public class TestService {
         Test test = testsRepository.findId(id);
         testsRepository.delete(test);
     }
-    public void addTest(Map<String, String> form,String title, String description){
+    public void addTest(Map<String, String> form,String title, String description,MultipartFile file) throws IOException {
         Test test = new Test(title,description,false);
         testsRepository.save(test);
         int q_count = 1;
@@ -93,7 +99,17 @@ public class TestService {
                 if(a_count==4){a_count=1;q_count++;}
             }
             if(key.equals("q"+q_count)){
+                String resultFilename = null;
+                if(q_count==1){
+                    if(file!=null){
+                        File fileDir = new File(uploadPath);
+                        String uuidFile = UUID.randomUUID().toString();
+                        resultFilename = uuidFile + "."+ file.getOriginalFilename();
+                        file.transferTo(new File(uploadPath+"/"+resultFilename));
+                    }
+                }
                 Question question = new Question(test.getId(),form.get(key));
+                question.setFilename(resultFilename);
                 questionRepository.save(question);
                 last_id_q =question.getId();
             }
@@ -133,11 +149,11 @@ public class TestService {
             List<Answer>  answers = answerRepository.findByQuestionId(q.getId());
             try{
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),answers.get(2).getAnswer(),
-                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId());
+                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId(),q.getFilename());
                 qm.add(questionModel);
             }catch (IndexOutOfBoundsException e){
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),null,
-                        answers.get(0).getId(),answers.get(1).getId(),null,q.getId());
+                        answers.get(0).getId(),answers.get(1).getId(),null,q.getId(),q.getFilename());
                 qm.add(questionModel);
             }
         }
