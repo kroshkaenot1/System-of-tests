@@ -8,14 +8,14 @@
 </head>
 <body class="bg-light">
 <div th:insert ="blocks/header::header"></div>
-<div class="container p-3 mb-2 bg-warning text-dark mt-5" th:each="el : ${test}">
+<div class="alert container p-3 mb-2 bg-warning text-dark mt-5" th:each="el : ${test}">
     <div><h1 class="text-center" th:text="${el.getTitle()}"></h1></div>
-    <div><p th:text="${el.getDescription()}"></p></div>
+    <div><p class="text-center" th:text="${el.getDescription()}"></p></div>
     <form th:action="'/test/' +${el.getId()}" method="post" id="test">
         <input hidden name="userId" th:value="${#httpServletRequest.remoteUser}">
-        <div class="p-3 mb-2 bg-dark text-white qu"th:each="a : ${questionModels}">
+        <div class="alert p-3 mb-2 bg-dark text-white qu"th:each="a : ${questionModels}">
             <div id="qBody">
-                <p th:text="${a.getQuestion_text()}"></p>
+                <b><h4 th:text="${a.getQuestion_text()}"></h4></b>
                 <img th:src="'/img/'+${a.getFileName()}" class="img" th:if="${a.getFileName()!=null}">
                 <div>
                     <div>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <input type="submit" value="Завершить тест">
+        <input class="btn btn-light" type="submit" value="Завершить тест">
     </form>
 </div>
 </body>

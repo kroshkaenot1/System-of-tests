@@ -8,15 +8,15 @@
 <body class="bg-light">
 <div th:insert ="blocks/header::header"></div>
 <div class="container my-5 mb-5">
-    <h1>Редактирование</h1>
-    <div th:each="el : ${user}" class="alert alert-info mt-2">
+    <h1 class="text-center">Редактирование</h1>
+    <div th:each="el : ${user}" class="alert container p-3 mb-2 bg-warning text-dark mt-2">
         <form action="" method="post">
-            <span th:text="${el.getUsername()}"></span><br>
+            <b><h4 th:text="'Роли пользователя - '+${el.getUsername()}"></h4><br></b>
             <div th:each="role:${roles}">
                 <input class="form-check-input" type="checkbox" th:name="${role}" th:checked="${el.ifRole(role)}">
                 <label class="form-check-label" th:text="${role}"></label>
             </div>
-            <button type="submit" class="btn btn-dark">Обновить</button>
+            <button type="submit" class="btn btn-dark mt-3">Обновить</button>
         </form>
     </div>
 </div>
