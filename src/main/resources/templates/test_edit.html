@@ -12,14 +12,14 @@
     <div th:insert ="blocks/header::header"></div>
     <div class="container mt-5 mb-5">
         <h1>Редактирование теста</h1>
-            <div th:each="el : ${test}" class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
+            <div th:each="el : ${test}" class="alert container p-3 mb-2 bg-warning text-dark mt-5" id="main">
                 <form th:action="'/test/' +${el.getId()}+ '/edit'" method="post" id="test">
-                    <div><input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control" required></div>
-                    <div><textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/></div>
+                   <input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control mb-2" required>
+                   <textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/>
                     <div class="mb-2"><input type="radio" id="private" name="isPrivate" value="private">
-                        <label for="private">Закрытый тест</label><br>
+                        <b><label for="private">Закрытый тест</label><br></b>
                         <input type="radio" id="open" name="isPrivate" value="open" checked>
-                        <label for="open">Открытый тест</label>
+                        <b><label for="open">Открытый тест</label></b>
                     </div>
                     <div class="checkselect">
                         <div th:each="el:${users}">
@@ -27,7 +27,7 @@
                             <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
                         </div>
                     </div>
-                    <div class="p-3 mb-2 bg-dark text-white qu"th:each="a,state : ${questionModels}">
+                    <div class="alert p-3 mb-2 bg-dark text-white qu"th:each="a,state : ${questionModels}">
                             <div th:id="'qBody'+${state.count}">
                                 <input th:if="${state.count>=2}" type="button" class="btn-close btn-close-white" onclick="deleteQuestion(this)" th:name="'closeQuest'+${state.count}">
                                 <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" placeholder="Введите вопрос" class="form-control mb-2" required>

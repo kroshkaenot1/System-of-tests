@@ -9,15 +9,15 @@
 </head>
 <body class="bg-light">
 <div th:insert ="blocks/header::header"></div>
-<div class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
+<div class="alert  bg-warning text-dark mt-5" id="main">
     <h1 class="text-center">Создание теста</h1>
     <form action="/test/add" method="post" id="test" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="Введите название" class="form-control" required>
+        <input type="text" name="title" placeholder="Введите название" class="form-control mb-2" required>
         <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea>
-        <div><input type="radio" id="private" name="isPrivate" value="private">
-            <label for="private">Закрытый тест</label><br>
+        <div><input class="mt-3" type="radio" id="private" name="isPrivate" value="private">
+            <b><label for="private">Закрытый тест</label><br></b>
             <input type="radio" id="open" name="isPrivate" value="open" checked>
-            <label for="open">Открытый тест</label>
+            <b><label for="open">Открытый тест</label></b>
         </div>
         <div class="checkselect">
             <div th:each="el:${users}">
@@ -25,7 +25,7 @@
                 <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
             </div>
         </div>
-        <div class="p-3 mb-2 bg-dark text-white qu">
+        <div class="alert p-3 mb-2 mt-3 bg-dark text-white qu">
             <div id="qBody1">
                 <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
                 <input type="file" class="form-control mb-4" name="img1">
