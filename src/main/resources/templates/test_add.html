@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../test_add.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Добавление теста</title>
 </head>
@@ -15,7 +17,14 @@
             <div><input type="radio" id="private" name="isPrivate" value="private">
                 <label for="private">Закрытый тест</label><br>
             <input type="radio" id="open" name="isPrivate" value="open" checked>
-                <label for="open">Открытый тест</label></div>
+                <label for="open">Открытый тест</label>
+            </div>
+            <div class="checkselect">
+                <div th:each="el:${users}">
+                    <input type="checkbox" name="names[]" th:value="${el.getUsername()}" th:id="${el.getUsername()}">
+                    <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
+                </div>
+            </div>
             <div class="p-3 mb-2 bg-dark text-white qu">
                 <div id="qBody1">
                     <input type="text" name="q1" placeholder="Введите вопрос" class="form-control mb-2" required>
@@ -48,5 +57,7 @@
     <div th:text="${message}"></div>
 </body>
 <script src="../test_add.js"></script>
+<script src="../test_add_list.js"></script>
 <script src="../answer_add.js"></script>
+
 </html>

@@ -3,8 +3,10 @@ package com.rgr.system_of_tests.controllers;
 import com.rgr.system_of_tests.repo.models.Question;
 import com.rgr.system_of_tests.repo.models.QuestionModel;
 import com.rgr.system_of_tests.repo.models.Test;
+import com.rgr.system_of_tests.repo.models.User;
 import com.rgr.system_of_tests.service.QuestionService;
 import com.rgr.system_of_tests.service.TestService;
+import com.rgr.system_of_tests.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ public class Testcontroller {
     private TestService testService;
     @Autowired
     QuestionService questionService;
+    @Autowired
+    private UserService usersService;
 
     @GetMapping("/")
     public String home(){
@@ -63,7 +67,11 @@ public class Testcontroller {
         return "redirect:/test";
     }
     @GetMapping("/test/add")
-    public String testAdd(){return "test_add";}
+    public String testAdd(Model model){
+        Iterable<User> users = usersService.getAllUsers();
+        model.addAttribute("users",users);
+        return "test_add";
+    }
 
     @PostMapping("/test/add")
     public String testPostAdd(@RequestParam Map<String, String> form,
