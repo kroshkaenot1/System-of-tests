@@ -2,7 +2,6 @@ package com.rgr.system_of_tests.service;
 
 import com.rgr.system_of_tests.repo.QuestionRepository;
 import com.rgr.system_of_tests.repo.models.Question;
-import com.rgr.system_of_tests.repo.models.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

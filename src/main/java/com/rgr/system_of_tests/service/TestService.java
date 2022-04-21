@@ -310,9 +310,12 @@ public class TestService {
     }
 
     public String files(MultipartFile file) throws IOException {
-        String uuidFile = UUID.randomUUID().toString();
-        String resultFilename = uuidFile + "." + file.getOriginalFilename();
-        file.transferTo(new File(uploadPath + "/" + resultFilename));
-        return resultFilename;
+        if(file.getSize()!=0){
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            return resultFilename;
+        }
+        return null;
     }
 }

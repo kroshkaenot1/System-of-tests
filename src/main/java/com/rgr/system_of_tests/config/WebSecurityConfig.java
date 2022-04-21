@@ -30,14 +30,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test/add").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
                 .antMatchers("/admin").hasAuthority(Role.ADMIN.getAuthority())
                 .antMatchers("/admin/*/edit").hasAuthority(Role.ADMIN.getAuthority())
-                .antMatchers("/", "/home","/registration","/activate/*").permitAll()
+                .antMatchers("/", "/home","/registration","/activate/*","/img/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().permitAll();
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(usersService)
