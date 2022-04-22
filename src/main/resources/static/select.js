@@ -44,3 +44,18 @@
 })(jQuery);
 
 $('.checkselect').checkselect();
+
+const priv = document.querySelector('#private');
+const open = document.querySelector('#open');
+const select = document.querySelector('.checkselect');
+priv.addEventListener('click',(event)=>{
+    if(event.target.checked){
+        select.classList.remove('hide');
+    }
+});
+open.addEventListener('click',(event)=>{
+    if(event.target.checked){
+        select.classList.add('hide');
+        $('input:checkbox').removeAttr('checked');
+    }
+});
