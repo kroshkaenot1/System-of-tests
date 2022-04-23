@@ -40,10 +40,7 @@ public class TestService {
         Test test = testsRepository.findId(id);
         return test;
     }
-    public void EditTest(long id,Map<String, String> form,MultipartFile img1,MultipartFile img2,
-                         MultipartFile img3,MultipartFile img4,MultipartFile img5,
-                         MultipartFile img6,MultipartFile img7,MultipartFile img8,
-                         MultipartFile img9,MultipartFile img10) throws IOException {
+    public void EditTest(long id,Map<String, String> form,MultipartFile[] files) throws IOException {
         Test test = testsRepository.findId(id);
         List<Question> q = questionRepository.findByTestId(test.getId());
         questionRepository.deleteAll(q);
@@ -80,46 +77,9 @@ public class TestService {
             }
             if(key.equals("q"+q_count)){
                 String resultFilename = null;
-                if(q_count==1){
-                    if(img1!=null){
-                        resultFilename = files(img1);
-                    }
-                }if(q_count==2){
-                    if(img2!=null){
-                        resultFilename = files(img2);
-                    }
-                }if(q_count==3){
-                    if(img3!=null){
-                        resultFilename = files(img3);
-                    }
-                }if(q_count==4){
-                    if(img4!=null){
-                        resultFilename = files(img4);
-                    }
-                }if(q_count==5){
-                    if(img5!=null){
-                        resultFilename = files(img5);
-                    }
-                }if(q_count==6){
-                    if(img6!=null){
-                        resultFilename = files(img6);
-                    }
-                }if(q_count==7){
-                    if(img7!=null){
-                        resultFilename = files(img7);
-                    }
-                }if(q_count==8){
-                    if(img8!=null){
-                        resultFilename = files(img8);
-                    }
-                }if(q_count==9){
-                    if(img9!=null){
-                        resultFilename = files(img9);
-                    }
-                }if(q_count==10){
-                    if(img10!=null){
-                        resultFilename = files(img10);
-                    }
+                try{
+                    resultFilename= img(files[q_count-1]);
+                }catch (IndexOutOfBoundsException e){
                 }
                 Question question = new Question(test.getId(),form.get(key));
                 question.setFilename(resultFilename);
@@ -135,10 +95,7 @@ public class TestService {
         Test test = testsRepository.findId(id);
         testsRepository.delete(test);
     }
-    public void addTest(Map<String, String> form,MultipartFile img1,MultipartFile img2,
-                        MultipartFile img3,MultipartFile img4,MultipartFile img5,
-                        MultipartFile img6,MultipartFile img7,MultipartFile img8,
-                        MultipartFile img9,MultipartFile img10) throws IOException {
+    public void addTest(Map<String, String> form,MultipartFile[] files) throws IOException {
         Test test = new Test(form.get("title"),form.get("description"),false);
         testsRepository.save(test);
         int q_count = 1;
@@ -175,46 +132,9 @@ public class TestService {
             }
             if(key.equals("q"+q_count)){
                 String resultFilename = null;
-                if(q_count==1){
-                    if(img1.getSize()!=0){
-                        resultFilename = files(img1);
-                    }
-                }if(q_count==2){
-                    if(img2.getSize()!=0){
-                        resultFilename = files(img2);
-                    }
-                }if(q_count==3){
-                    if(img3.getSize()!=0){
-                        resultFilename = files(img3);
-                    }
-                }if(q_count==4){
-                    if(img4.getSize()!=0){
-                        resultFilename = files(img4);
-                    }
-                }if(q_count==5){
-                    if(img5.getSize()!=0){
-                        resultFilename = files(img5);
-                    }
-                }if(q_count==6){
-                    if(img6.getSize()!=0){
-                        resultFilename = files(img6);
-                    }
-                }if(q_count==7){
-                    if(img7.getSize()!=0){
-                        resultFilename = files(img7);
-                    }
-                }if(q_count==8){
-                    if(img8.getSize()!=0){
-                        resultFilename = files(img8);
-                    }
-                }if(q_count==9){
-                    if(img9.getSize()!=0){
-                        resultFilename = files(img9);
-                    }
-                }if(q_count==10){
-                    if(img10.getSize()!=0){
-                        resultFilename = files(img10);
-                    }
+                try{
+                    resultFilename= img(files[q_count-1]);
+                }catch (IndexOutOfBoundsException e){
                 }
                 Question question = new Question(test.getId(),form.get(key));
                 question.setFilename(resultFilename);
@@ -309,7 +229,7 @@ public class TestService {
 
     }
 
-    public String files(MultipartFile file) throws IOException {
+    public String img(MultipartFile file) throws IOException {
         if(file.getSize()!=0){
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();

@@ -28,7 +28,7 @@ function createQuestion(buttonAddQ){
     let inputImg = document.createElement('input');
     inputImg.setAttribute('type','file');
     inputImg.setAttribute('class','form-control mb-4');
-    inputImg.setAttribute('name','img'+count);
+    inputImg.setAttribute('name','files');
 
     let divR1 = document.createElement('div');
     divR1.setAttribute('class','row g-2 mb-2');
@@ -155,7 +155,6 @@ function deleteQuestion(button){
     redefinition('addansw');
     redefinition('closeQuest');
     redefinition('q');
-    redefinition('img');
 
     for(let i =1;i<=count;i++){
         for(let j = 1;j<=3;j++){
