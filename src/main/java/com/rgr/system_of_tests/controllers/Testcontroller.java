@@ -47,14 +47,9 @@ public class Testcontroller {
         Test test = testService.getTestById(id);
         model.addAttribute("test",test);
 
-        List<Question> questions = questionService.getQuestionsById(id);
-        model.addAttribute("questions",questions);
-
         ArrayList<QuestionModel> qm = testService.testViewById(id);
-        if(qm==null){
-            return "redirect:/test";
-        }
         model.addAttribute("questionModels",qm);
+
         Iterable<User> users = usersService.getAllUsers();
         model.addAttribute("users",users);
         return "test_edit";

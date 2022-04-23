@@ -44,7 +44,7 @@
                                         <input type="text" th:value="${a.getAnswer1()}" th:name="'a'+${state.count}+'1'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'1'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'1'" placeholder="Количество баллов" class="form-control" th:value="${a.getScore1()}" required>
                                     </div>
                                 </div>
                                 <div class="row g-2 mb-2">
@@ -52,7 +52,7 @@
                                         <input type="text" th:value="${a.getAnswer2()}" th:name="'a'+${state.count}+'2'"  placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'2'"  placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'2'"  placeholder="Количество баллов" class="form-control" th:value="${a.getScore2()}" required>
                                     </div>
                                 </div>
                                 <div class="row g-2 mb-2" th:if="${a.getAnswer3()!=null}" th:id="'third'+${state.count}">
@@ -60,7 +60,7 @@
                                         <input type="text" th:value="${a.getAnswer3()}" th:name="'a'+${state.count}+'3'" placeholder="Варианты ответов" class="form-control" required>
                                     </div>
                                     <div class="col md-4">
-                                        <input type="number" th:name="'b'+${state.count}+'3'" placeholder="Количество баллов" class="form-control" value="0" required>
+                                        <input type="number" th:name="'b'+${state.count}+'3'" placeholder="Количество баллов" class="form-control" th:value="${a.getScore3()}" required>
                                     </div>
                                     <div class="col">
                                         <input type="button" class="btn-close btn-close-white" onclick="deleteVar(this)" th:name="'deleteVar'+${state.count}">

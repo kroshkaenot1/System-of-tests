@@ -177,11 +177,11 @@ public class TestService {
             List<Answer>  answers = answerRepository.findByQuestionId(q.getId());
             try{
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),answers.get(2).getAnswer(),
-                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId(),q.getFilename());
+                        answers.get(0).getId(),answers.get(1).getId(),answers.get(2).getId(),q.getId(),q.getFilename(),answers.get(0).getScore(),answers.get(1).getScore(),answers.get(2).getScore());
                 qm.add(questionModel);
             }catch (IndexOutOfBoundsException e){
                 QuestionModel questionModel = new QuestionModel(q.getQuestion_text(),answers.get(0).getAnswer(),answers.get(1).getAnswer(),null,
-                        answers.get(0).getId(),answers.get(1).getId(),null,q.getId(),q.getFilename());
+                        answers.get(0).getId(),answers.get(1).getId(),null,q.getId(),q.getFilename(),answers.get(0).getScore(),answers.get(1).getScore(),0);
                 qm.add(questionModel);
             }
         }
@@ -224,7 +224,7 @@ public class TestService {
                 max
 
         );
-        mailSender.send(email,"Результат тестированя",messageForEmail);
+        mailSender.send(email,"Результат тестирования",messageForEmail);
         return message;
 
     }
