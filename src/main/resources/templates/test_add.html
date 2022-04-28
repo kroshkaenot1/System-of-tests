@@ -15,10 +15,23 @@
     <form action="/test/add" method="post" id="test" enctype="multipart/form-data">
         <input type="text" name="title" placeholder="Введите название" class="form-control mb-2" required>
         <textarea name="description" placeholder="Введите описание" class="form-control" required></textarea>
-        <div><input class="mt-3" type="radio" id="private" name="isPrivate" value="private">
-            <b><label for="private">Закрытый тест</label><br></b>
-            <input type="radio" id="open" name="isPrivate" value="open" checked>
-            <b><label for="open">Открытый тест</label></b>
+        <div class="row">
+            <div class="col-md-8">
+                <input class="mt-3" type="radio" id="private" name="isPrivate" value="private">
+                <b><label for="private">Закрытый тест</label></b>
+            </div>
+            <div class="col-md-4">
+                <input class="mt-3" id="nonLimited" type="radio" name="limit" value="nonLimited" checked>
+                <b><label for="nonLimited">Без ограничения по времени</label></b>
+            </div>
+            <div class="col-md-8">
+                <input class="mt-3" type="radio" id="open" name="isPrivate" value="open" checked>
+                <b><label for="open">Открытый тест</label></b>
+            </div>
+            <div class="col-md-4">
+                <input class="mt-3" id="Limited" type="radio" name="limit" value="Limited">
+                <b><label for="Limited">Ограничить время выполнения теста на 30 минут</label></b>
+            </div>
         </div>
         <div class="checkselect hide">
             <div th:each="el:${users}">
