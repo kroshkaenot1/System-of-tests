@@ -13,7 +13,7 @@ public class Test {
     private Long id;
     private String title,description;
     private LocalDateTime date;
-    private Boolean isPrivate;
+    private Boolean isPrivate, isLimited;
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
@@ -26,6 +26,13 @@ public class Test {
         isPrivate = aPrivate;
     }
 
+    public void setLimited(Boolean limited) {
+        isLimited = limited;
+    }
+
+    public Boolean getLimited() {
+        return isLimited;
+    }
 
     public Test(String title, String description, Boolean isPrivate) {
         this.title = title;

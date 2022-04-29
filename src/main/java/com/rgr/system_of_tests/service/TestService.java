@@ -53,7 +53,14 @@ public class TestService {
                 if(form.get(key).equals("private")){
                     test.setPrivate(true);
                 }
-            }if(key.equals("names[]")){
+            }if(key.equals("limit")){
+                if(form.get(key).equals("Limited")){
+                    test.setLimited(true);
+                } else {
+                    test.setLimited(false);
+                }
+            }
+            if(key.equals("names[]")){
                 Long userId = Long.parseLong(form.get(key));
                 Invitation inv = new Invitation(test.getId(),userId);
                 invitationRepository.save(inv);
@@ -106,6 +113,13 @@ public class TestService {
             if(key.equals("isPrivate")){
                 if(form.get(key).equals("private")){
                     test.setPrivate(true);
+                }
+            }
+            if(key.equals("limit")){
+                if(form.get(key).equals("Limited")){
+                    test.setLimited(true);
+                } else {
+                    test.setLimited(false);
                 }
             }
             if(key.equals("names[]")){
