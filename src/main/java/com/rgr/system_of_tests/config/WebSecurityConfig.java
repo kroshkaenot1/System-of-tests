@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
+                .antMatchers("/", "/home","/registration","/activate/*","/img/*").permitAll()
                 .antMatchers("/test").authenticated()
                 .antMatchers("/test/*").authenticated()
                 .antMatchers("/test/*/edit").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
@@ -30,7 +31,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test/add").hasAnyAuthority(Role.ADMIN.getAuthority(), Role.TESTER.getAuthority())
                 .antMatchers("/admin").hasAuthority(Role.ADMIN.getAuthority())
                 .antMatchers("/admin/*/edit").hasAuthority(Role.ADMIN.getAuthority())
-                .antMatchers("/", "/home","/registration","/activate/*","/img/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

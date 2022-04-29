@@ -14,15 +14,15 @@
         <div>
             <div>
                 <h4 class="mb-3">Данные:</h4>
-                <form method="post" action="/registration">
+                <form method="post" action="/registration" class="needs-validation" novalidate>
                     <div class="row">
                         <div>
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="you@example.com" name="username" required>
                         </div>
                         <div class="col-sm">
-                            <label for="firstName" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="firstName" name="firstname" required>
+                            <label for="validationCustom01" class="form-label ">Имя</label>
+                            <input type="text" class="form-control is-valid" id="validationCustom01" name="firstname" required>
                         </div>
                         <div class="col-sm">
                             <label for="lastName" class="form-label">Фамилия</label>
@@ -56,5 +56,27 @@
         </div>
     </main>
 </div>
+<script>
+    // Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
+    (function () {
+        'use strict'
+
+        // Получите все формы, к которым мы хотим применить пользовательские стили проверки Bootstrap
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Зацикливайтесь на них и предотвращайте отправку
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 </body>
 </html>

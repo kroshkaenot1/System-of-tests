@@ -11,9 +11,8 @@
 </head>
 <body class="bg-light">
     <div th:insert ="blocks/header::header"></div>
-    <div class="container mt-5 mb-5">
-        <h1>Редактирование теста</h1>
-            <div th:each="el : ${test}" class="container p-3 mb-2 bg-warning text-dark mt-5" id="main">
+            <div th:each="el : ${test}" class="alert container bg-warning text-dark mt-5" id="main">
+                <h1 class="text-center">Редактирование теста</h1>
                 <form th:action="'/test/' +${el.getId()}+ '/edit'" method="post" id="test" enctype="multipart/form-data">
                     <input type="text" th:value="${el.getTitle()}" name="title" placeholder="Введите название" class="form-control mb-2" required>
                     <textarea name="description" placeholder="Введите описание" class="form-control" th:text="${el.getDescription()}" required/>
@@ -36,17 +35,17 @@
                         </div>
                     </div>
                     <div class="dropdown hide">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Dropdown button</button>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Пригласить</button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li th:each="el:${users}"><div class="input-group">
                                 <div class="input-group-text" style="width: 100%;">
-                                    <input type="checkbox" name="names[]" th:value="${el.getId()}" th:id="${el.getUsername()}">
+                                    <input type="checkbox" name="names[]" class="me-3" th:value="${el.getId()}" th:id="${el.getUsername()}">
                                     <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
                                 </div>
                             </div></li>
                         </ul>
                     </div>
-                    <div class="p-3 mb-2 mt-3 bg-dark text-white qu"th:each="a,state : ${questionModels}">
+                    <div class="alert p-3 mb-2 mt-3 bg-dark text-white qu"th:each="a,state : ${questionModels}">
                             <div th:id="'qBody'+${state.count}">
                                 <input th:if="${state.count>=2}" type="button" class="btn-close btn-close-white" onclick="deleteQuestion(this)" th:name="'closeQuest'+${state.count}">
                                 <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" placeholder="Введите вопрос" class="form-control mb-2" required>
@@ -91,7 +90,6 @@
                 <button type="submit" class="btn btn-dark mt-4" form="test">Обновить тест</button>
                 <input type="button" class="btn btn-dark mt-4" value="Добавить вопрос" id="b1" onclick="createQuestion(this)">
             </div>
-    </div>
 </body>
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

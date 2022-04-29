@@ -33,11 +33,11 @@
             </div>
         </div>
         <div class="dropdown hide">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Dropdown button</button>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Пригласить</button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li th:each="el:${users}"><div class="input-group">
                     <div class="input-group-text" style="width: 100%;">
-                        <input type="checkbox" name="names[]" th:value="${el.getId()}" th:id="${el.getUsername()}">
+                        <input type="checkbox" name="names[]" class="me-3" th:value="${el.getId()}" th:id="${el.getUsername()}">
                         <label th:text="${el.getUsername()}" th:for="${el.getUsername()}"></label>
                     </div>
                 </div></li>
