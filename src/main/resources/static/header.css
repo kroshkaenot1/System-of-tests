@@ -1,0 +1,18 @@
+.h a {
+    position: relative;
+}
+.h a:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffc107;
+    content: "";
+    transition: width 0.3s ease-out;
+}
+
+.h a:hover:after,
+.h a:focus:after {
+    width: 100%;
+}
