@@ -19,26 +19,44 @@
                         <div>
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="you@example.com" name="username" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста,введите email.
+                            </div>
                         </div>
                         <div class="col-sm">
-                            <label for="validationCustom01" class="form-label ">Имя</label>
-                            <input type="text" class="form-control is-valid" id="validationCustom01" name="firstname" required>
+                            <label for="firstname" class="form-label ">Имя</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста,введите имя.
+                            </div>
                         </div>
                         <div class="col-sm">
                             <label for="lastName" class="form-label">Фамилия</label>
                             <input type="text" class="form-control" id="lastName" name="lastname"  required>
+                            <div class="invalid-feedback">
+                                Пожалуйста,введите фамилию.
+                            </div>
                         </div>
                         <div class="col-sm">
                             <label for="patronymic" class="form-label">Отчество</label>
                             <input type="text" class="form-control" id="patronymic" name="patronymic">
+                            <div class="valid-feedback">
+                                Отчество необязательно.
+                            </div>
                         </div>
                         <div>
                             <label for="dateOfBirth" class="form-label">Дата рождения</label>
                             <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                            <div class="valid-feedback">
+                                Дата рождения необязательна.
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Пароль</label>
                             <input type="password" class="form-control" id="password"  name="password" required>
+                            <div class="invalid-feedback">
+                                Пожалуйста,введите пароль.
+                            </div>
                         </div>
                     </div>
                     <div class="text-center">

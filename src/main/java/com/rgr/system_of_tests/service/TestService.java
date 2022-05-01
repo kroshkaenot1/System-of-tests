@@ -244,6 +244,10 @@ public class TestService {
     }
 
     public String img(MultipartFile file) throws IOException {
+        File uploadDir = new File(uploadPath);
+        if(!uploadDir.exists()){
+            uploadDir.mkdir();
+        }
         if(file.getSize()!=0){
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
