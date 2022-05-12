@@ -11,6 +11,7 @@
 <body class="bg-light">
 <div th:insert ="blocks/header::header"></div>
 <div class="alert container p-3 mb-2 bg-warning text-dark mt-5" th:each="el : ${test}">
+    <input type="hidden" th:value="${el.getLimited()}" name="isLimited" id="isLimited">
     <div><h1 class="text-center" th:text="${el.getTitle()}"></h1></div>
     <div><p class="text-center" th:text="${el.getDescription()}"></p></div>
     <form th:action="'/test/' +${el.getId()}" method="post" id="test">
@@ -33,7 +34,9 @@
             </div>
         </div>
         <input class="btn btn-dark" type="submit" value="Завершить тест">
+        <p id="timer" th:if="${el.getLimited()}"></p>
     </form>
 </div>
 </body>
+<script src="/static/testView.js"></script>
 </html>
