@@ -4,14 +4,14 @@ document.querySelector('#input').oninput = function () {
     if(value!=''){
         list.forEach(function (element){
             if(element.querySelector('.title').innerText.toLowerCase().search(value)==-1 && element.querySelector('.desc').innerText.toLowerCase().search(value)==-1 ){
-                element.classList.add('hide');
+                element.style.display = "none";
             }else{
-                element.classList.remove('hide');
+                element.style.display="";
             }
         });
     } else {
         list.forEach(function (element){
-            element.classList.remove('hide');
+            element.style.display="";
         });
     }
 }
