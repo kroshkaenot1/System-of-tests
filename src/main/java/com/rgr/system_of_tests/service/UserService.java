@@ -4,6 +4,7 @@ import com.rgr.system_of_tests.repo.models.Role;
 import com.rgr.system_of_tests.repo.models.User;
 import com.rgr.system_of_tests.repo.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +21,8 @@ public class UserService implements UserDetailsService {
     private UsersRepository usersRepository;
     @Autowired
     private MailSender mailSender;
-
+    @Autowired
+    private MessageSource messageSource;
     public String getCurrentUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return auth.getName();
@@ -41,12 +43,11 @@ public class UserService implements UserDetailsService {
         user.setActivationCode(UUID.randomUUID().toString());
         usersRepository.save(user);
         String message = String.format(
-                "Доброго времени суток,%s \n"+
-                        "Пожалуйста, пройдите по ссылке для активации аккаунта: http://localhost:8080/activate/%s",
+                 messageSource.getMessage("invite.reg",new Object[0],new Locale("ru"))+"http://localhost:8080/activate/%s",
                 user.getFirstname(),
                 user.getActivationCode()
         );
-        mailSender.send(user.getUsername(),"Код активации",message);
+        mailSender.send(user.getUsername(),messageSource.getMessage("subject.act",new Object[0],new Locale("ru")),message);
         return true;
     }
 

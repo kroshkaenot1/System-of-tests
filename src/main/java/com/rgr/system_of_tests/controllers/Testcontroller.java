@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class Testcontroller {
     @Autowired
     private TestService testService;
     @Autowired
-    QuestionService questionService;
+    private QuestionService questionService;
     @Autowired
     private UserService usersService;
 
@@ -55,7 +54,9 @@ public class Testcontroller {
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")
-    public String testUpd(@PathVariable(value = "id") long id,@RequestParam Map<String, String> form,@RequestParam(value = "files",required = false) MultipartFile[] files) throws IOException {
+    public String testUpd(@PathVariable(value = "id") long id,
+                          @RequestParam Map<String, String> form,
+                          @RequestParam(value = "files",required = false) MultipartFile[] files){
         testService.EditTest(id, form, files);
         return "redirect:/test";
     }
@@ -72,7 +73,8 @@ public class Testcontroller {
     }
 
     @PostMapping("/test/add")
-    public String testPostAdd(@RequestParam Map<String, String> form,@RequestParam(value = "files",required = false) MultipartFile[] files) throws IOException {
+    public String testPostAdd(@RequestParam Map<String, String> form,
+                              @RequestParam(value = "files",required = false) MultipartFile[] files){
         testService.addTest(form,files);
         return "redirect:/test";
 

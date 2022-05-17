@@ -11,7 +11,8 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title,description;
+    private String title;
+    private String description;
     private LocalDateTime date;
     private Boolean isPrivate, isLimited;
     public void setDate(LocalDateTime date) {
