@@ -128,18 +128,30 @@ function createButtonAdd(){
     mainDiv.appendChild(add);
 }
 function deleteQuestion(button){
+    let i;
     let n = button.getAttribute('name');
     let num = Number(n[10]);
     let num10 = Number(n[10]+n[11]);
+    let deletes = [];
     let answers = [];
     let score = [];
+    let thirds = [];
     let q = [];
     let t = 1;
     if(num10==10){
         num=10;
     }
     for(let i=1;i<=count;i++){
+        let th = document.getElementById('third'+i);
         let temp = document.getElementById('qBody'+i);
+        let k = "deleteVar"+i;
+        let d = document.querySelector(`#test input[name='${k}']`);
+        if(d!=null){
+            deletes.push(d);
+        }
+        if(th!=null){
+            thirds.push(th);
+        }
         if(temp!=null)
         q.push(temp);
     }
@@ -153,7 +165,22 @@ function deleteQuestion(button){
     redefinition('addansw');
     redefinition('closeQuest');
     redefinition('q');
-
+    deletes.forEach((el)=>{
+        let o;
+        if(el.name[10]=='0'){
+            o = 10;
+        }else{
+            o = Number(el.name[9]);
+        }
+        if(o>num){
+            o--;
+            el.setAttribute('name','deleteVar'+o);
+        }
+    });
+    thirds.forEach((el)=>{
+        i = el.parentNode.id;
+        el.setAttribute('id','third'+i[5]);
+    });
     for(let i =1;i<=count;i++){
         for(let j = 1;j<=3;j++){
             let k = 'a'+i+j;
