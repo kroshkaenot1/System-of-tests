@@ -4,7 +4,7 @@ let count = document.querySelectorAll('.qu').length;
 function createQuestion(buttonAddQ){
     count++;
     let questionDiv = document.createElement('div');
-    questionDiv.setAttribute('class','p-3 mb-2 bg-dark text-white qu');
+    questionDiv.setAttribute('class','alert p-3 mb-2 bg-dark text-white qu');
 
     let childDiv = document.createElement('div');
     childDiv.setAttribute('id','qBody'+count);
