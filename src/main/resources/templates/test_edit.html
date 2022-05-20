@@ -51,10 +51,10 @@
                                 <input type="text" th:value="${a.getQuestion_text()}" th:name="'q'+${state.count}" th:placeholder="#{test.placeholder.que}" class="form-control mb-2" required>
                                 <div th:id="'f'+${state.count}">
                                     <div th:id="'file'+${state.count}" th:if="${a.getFileName()!=null}">
-                                        <input type="button" class="btn-close btn-close-white" onclick="deleteImg(this)" th:id="'deleteImg'+${state.count}">
-                                        <img th:src="'/img/'+${a.getFileName()}" class="img">
-                                        <input type="hidden" th:name="'img'+${state.count}" th:value="${a.getFileName()}"></div>
-                                    <input type="file" class="form-control mb-4" name="files" th:if="${a.getFileName()==null}">
+                                        <input type="button" class="btn-close btn-close-white" onclick="deleteImg(this)" th:id="'deleteImg'+${state.count}" style="margin-bottom:5em">
+                                        <img th:src="'/img/'+${a.getFileName()}" class="img mb-2">
+                                        <input type="hidden" th:name="'img'+${state.count}" th:value="${a.getFileName()}" th:if="${a.getFileName()!=null}"></div>
+                                        <input type="file" class="form-control mb-4" name="files">
                                 </div>
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-8">
@@ -88,7 +88,7 @@
                         </div>
                 </form>
                 <button type="submit" class="btn btn-dark mt-4" form="test" th:text="#{testEdit.button.updateTest}"></button>
-                <input type="button" class="btn btn-dark mt-4" th:value="#{test.button.addQuestion}" id="b1" onclick="createQuestion(this)">
+                <input type="button" class="btn btn-dark mt-4" th:value="#{test.button.addQuestion}" id="b1" onclick="createQuestion(this)" th:if="${size!=10}">
             </div>
 </body>
 <script
