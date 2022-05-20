@@ -51,6 +51,7 @@ public class Testcontroller {
 
         Iterable<User> users = usersService.getAllUsers();
         model.addAttribute("users",users);
+        model.addAttribute("size",qm.size());
         return "test_edit";
     }
     @PostMapping("/test/{id}/edit")

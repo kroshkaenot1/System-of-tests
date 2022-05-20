@@ -67,3 +67,17 @@ function deleteVar(button){
     buttonAddAnsw.setAttribute('name','addansw'+Id);
     document.querySelector('#qBody'+Id).parentNode.appendChild(buttonAddAnsw);
 }
+function deleteImg(button){
+    let name = button.id;
+    document.querySelector('#file'+name[9]).remove();
+}
+let fileInputs = document.querySelectorAll("#test input[name=files]");
+fileInputs.forEach((el)=>{
+    el.addEventListener('change',function (event){
+        let i = this.parentNode.id[1];
+        if(this.parentNode.id[2]=="0"){
+            i=10
+        }
+        document.querySelector("#file" + i).remove();
+    });
+});

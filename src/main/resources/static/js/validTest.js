@@ -6,7 +6,7 @@ form.onsubmit = function (){
     let formInputs = document.querySelectorAll('#test input');
     let i = 0;
     formInputs.forEach((el)=> {
-        if (el.name != "files" && el.type!="button") {
+        if (el.name != "files" && el.type!="button" && el.type!="hidden") {
             el.addEventListener('input',function (event){
                 if (el.value.length > 50 || el.value === "") {
                     el.classList.add('error');
