@@ -173,6 +173,7 @@ public class TestService {
                 }
             }
         } catch (Exception e) {
+            System.out.println("exc");
             testsRepository.delete(test);
         }
 
@@ -269,6 +270,7 @@ public class TestService {
         }
         if(file.getSize()!=0){
             if(file.getOriginalFilename().endsWith(".jpg")!=true){
+                System.out.println("suffix");
                 throw new Exception("suffix is not .jpg");
             }
             String uuidFile = UUID.randomUUID().toString();
